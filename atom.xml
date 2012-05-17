@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[dain's personal website]]></title>
-  <link href="http://danieldemmel.me/atom.xml" rel="self"/>
-  <link href="http://danieldemmel.me/"/>
-  <updated>2012-04-22T01:49:47+01:00</updated>
-  <id>http://danieldemmel.me/</id>
+  <link href="http://daaain.github.com/atom.xml" rel="self"/>
+  <link href="http://daaain.github.com/"/>
+  <updated>2012-05-17T22:39:28+01:00</updated>
+  <id>http://daaain.github.com/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
     
@@ -14,11 +14,80 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Setting up Octopress]]></title>
+    <link href="http://daaain.github.com/blog/2012/05/17/setting-up-octopress/"/>
+    <updated>2012-05-17T22:18:00+01:00</updated>
+    <id>http://daaain.github.com/blog/2012/05/17/setting-up-octopress</id>
+    <content type="html"><![CDATA[<h2>Steps I&#8217;ve taken</h2>
+
+<p>Note: &#8216;username&#8217; is your Github username and &#8216;myblog&#8217; is the name of your blog which you&#8217;ll have to replace in the instructions.</p>
+
+<h3>Set up Github repository for hosting</h3>
+
+<p>Go to: https://github.com/new</p>
+
+<p>Fill in form and create repo called &#8220;username.github.com&#8221;</p>
+
+<h3>Set up Octopress <a href="http://octopress.org/docs/setup/">–></a></h3>
+
+<p>If you don&#8217;t have it yet, install <a href="https://github.com/sstephenson/rbenv#section_2">rbenv</a> and <a href="https://github.com/sstephenson/ruby-build#installing-ruby-build">ruby-build</a> (to handle Ruby runtimes and build gems). If you&#8217;re on Windows this is going to be a bit more complicated, but setting up <a href="http://rubyinstaller.org/downloads">RubyInstaller</a> and <a href="https://github.com/oneclick/rubyinstaller/wiki/Development-Kit">Ruby Development Kit</a> is not that bad.</p>
+
+<pre><code>$ rbenv install 1.9.2-p290
+$ git clone git://github.com/imathis/octopress.git myblog
+$ cd myblog
+$ gem install bundler
+$ rbenv rehash
+$ bundle install
+</code></pre>
+
+<h3>Get a nice theme <a href="http://zespia.tw/Octopress-Theme-Slash/">–></a></h3>
+
+<pre><code>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ rake install['slash']
+</code></pre>
+
+<h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">–></a></h3>
+
+<p>Edit &#8220;Main Configs&#8221; in _config.yml</p>
+
+<h3>Create your first post <a href="http://octopress.org/docs/blogging/">–></a></h3>
+
+<pre><code>$ rake new_post["Hello World!"]
+</code></pre>
+
+<p>Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown</p>
+
+<h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">–></a></h3>
+
+<pre><code>$ rake setup_github_pages
+</code></pre>
+
+<p>Paste your Github repo URL: git@github.com:username/username.github.com.git</p>
+
+<pre><code>$ rake generate
+$ powify create myblog
+$ powify browse myblog
+</code></pre>
+
+<p>See if it&#8217;s all good locally</p>
+
+<pre><code>$ rake deploy
+</code></pre>
+
+<p>Check the real thing: http://username.github.com</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[puts 'Hello world']]></title>
-    <link href="http://danieldemmel.me/blog/2012/04/22/puts-hello-world/"/>
-    <updated>2012-04-22T01:48:00+01:00</updated>
-    <id>http://danieldemmel.me/blog/2012/04/22/puts-hello-world</id>
-    <content type="html"><![CDATA[
+    <link href="http://daaain.github.com/blog/2012/05/17/puts-hello-world/"/>
+    <updated>2012-05-17T21:48:00+01:00</updated>
+    <id>http://daaain.github.com/blog/2012/05/17/puts-hello-world</id>
+    <content type="html"><![CDATA[<p>A brave new blog, this time powered by the impressive dream team of <a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://compass-style.org/">Compass</a>, <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://octopress.org/">Octopress</a> and <a href="https://github.com/">Github</a>.</p>
+
+<p>No database to worry about, back up and restore. Everything is in a Git repository, kindly hosted and served up to the world by Github.</p>
+
+<p>All content is created in <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a>, hand typed in <a href="http://mouapp.com/">Mou.app</a>.</p>
 ]]></content>
   </entry>
   
