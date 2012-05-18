@@ -4,7 +4,7 @@
   <title><![CDATA[dain's personal website]]></title>
   <link href="http://daaain.github.com/atom.xml" rel="self"/>
   <link href="http://daaain.github.com/"/>
-  <updated>2012-05-18T01:34:33+01:00</updated>
+  <updated>2012-05-18T01:55:19+01:00</updated>
   <id>http://daaain.github.com/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -28,7 +28,7 @@
 
 <p>Fill in form and create repo called &#8220;username.github.com&#8221;</p>
 
-<h3>Set up Octopress <a href="http://octopress.org/docs/setup/">–></a></h3>
+<h3>Set up Octopress <a href="http://octopress.org/docs/setup/">&#8594;</a></h3>
 
 <p>If you don&#8217;t have it yet, install <a href="https://github.com/sstephenson/rbenv#section_2">rbenv</a> and <a href="https://github.com/sstephenson/ruby-build#installing-ruby-build">ruby-build</a> (to handle Ruby runtimes and build gems). If you&#8217;re on Windows this is going to be a bit more complicated, but setting up <a href="http://rubyinstaller.org/downloads">RubyInstaller</a> and <a href="https://github.com/oneclick/rubyinstaller/wiki/Development-Kit">Ruby Development Kit</a> is not that bad.</p>
 
@@ -40,24 +40,24 @@ $ rbenv rehash
 $ bundle install
 </code></pre>
 
-<h3>Get a nice theme <a href="http://zespia.tw/Octopress-Theme-Slash/">–></a></h3>
+<h3>Get a nice theme <a href="http://zespia.tw/Octopress-Theme-Slash/">&#8594;</a></h3>
 
 <pre><code>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
 $ rake install['slash']
 </code></pre>
 
-<h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">–></a></h3>
+<h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">&#8594;</a></h3>
 
 <p>Edit &#8220;Main Configs&#8221; in _config.yml</p>
 
-<h3>Create your first post <a href="http://octopress.org/docs/blogging/">–></a></h3>
+<h3>Create your first post <a href="http://octopress.org/docs/blogging/">&#8594;</a></h3>
 
 <pre><code>$ rake new_post["Hello World!"]
 </code></pre>
 
 <p>Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown</p>
 
-<h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">–></a></h3>
+<h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">&#8594;</a></h3>
 
 <pre><code>$ rake setup_github_pages
 </code></pre>
