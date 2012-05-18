@@ -15,7 +15,7 @@ Go to: https://github.com/new
 
 Fill in form and create repo called "username.github.com"
 
-### Set up Octopress [–>](http://octopress.org/docs/setup/)
+### Set up Octopress [&#8594;](http://octopress.org/docs/setup/)
 
 If you don't have it yet, install [rbenv](https://github.com/sstephenson/rbenv#section_2) and [ruby-build](https://github.com/sstephenson/ruby-build#installing-ruby-build) (to handle Ruby runtimes and build gems). If you're on Windows this is going to be a bit more complicated, but setting up [RubyInstaller](http://rubyinstaller.org/downloads) and [Ruby Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) is not that bad.
 
@@ -26,22 +26,22 @@ If you don't have it yet, install [rbenv](https://github.com/sstephenson/rbenv#s
     $ rbenv rehash
     $ bundle install
 
-### Get a nice theme [–>](http://zespia.tw/Octopress-Theme-Slash/)
+### Get a nice theme [&#8594;](http://zespia.tw/Octopress-Theme-Slash/)
 
     $ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
     $ rake install['slash']
 
-### Configure Octopress [–>](http://octopress.org/docs/configuring/)
+### Configure Octopress [&#8594;](http://octopress.org/docs/configuring/)
 
 Edit "Main Configs" in _config.yml
 
-### Create your first post [–>](http://octopress.org/docs/blogging/)
+### Create your first post [&#8594;](http://octopress.org/docs/blogging/)
 
     $ rake new_post["Hello World!"]
     
 Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown
 
-### Generate page and see it in your browser [–>](http://octopress.org/docs/deploying/github/)
+### Generate page and see it in your browser [&#8594;](http://octopress.org/docs/deploying/github/)
 
     $ rake setup_github_pages
     
