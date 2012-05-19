@@ -18,8 +18,7 @@ article{
 		}
 	}
 	.entry{
-		line-height: 2;
-		text-align: justify;
+		line-height: 1.5;
 		a{
 			&:hover{
 				text-decoration: underline;
@@ -60,6 +59,9 @@ article{
 				border-bottom: 1px solid $gray05;
 				width: 100%;
 			}
+		}
+		h3{
+			margin-top: 1em;
 		}
 		img, video{
 			max-width: 100%;
