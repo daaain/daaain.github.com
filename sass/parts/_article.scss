@@ -15,6 +15,10 @@ article{
 		margin-bottom: 20px;
 		a{
 			color: $gray01;
+			@include transition(0.3s);
+			&:hover{
+				color: $main;
+			}
 		}
 	}
 	.entry{
