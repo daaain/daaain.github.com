@@ -36,6 +36,7 @@ header{
 		max-width: 13em;
 		line-height: 1em;
 		opacity: 0.75;
+		pointer-events: none;
 		@media screen and (max-width: 600px){
 			font-size: 1em;
 		}
