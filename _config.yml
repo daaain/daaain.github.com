@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://daaain.github.com
-title: dain's personal website
-subtitle: thoughts mostly on technology
+url: http://danieldemmel.me
+title: I am dain
+subtitle: and these are my thoughts mostly on technology
 author: Daniel Demmel
 simple_search: http://google.com/search
 description:
@@ -53,7 +53,7 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+default_asides: []
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -88,13 +88,8 @@ google_plus_one_size: medium
 googleplus_user: 113493406902726917349
 googleplus_hidden: false
 
-# Pinboard
-pinboard_user:
-pinboard_count: 3
-
-# Delicious
-delicious_user:
-delicious_count: 3
+# Pinterest
+pinterest_user: daaain
 
 # Disqus Comments
 disqus_short_name: daaain
@@ -103,7 +98,9 @@ disqus_show_comment_count: false
 # Google Analytics
 google_analytics_tracking_id: UA-31862126-1
 
-# Facebook Like
+# Facebook
+facebook_user: daniel.demmel
 facebook_like: true
 
+# AddThis
 addthis_profile_id: ra-4fb5981a7909521f
