@@ -13,6 +13,9 @@ header{
 			right: 0;
 		}
 	}
+	&:hover .social a{
+		opacity: 0.5;
+	}
 	a{
 		color: $gray01;
 		@include transition(0.3s);
@@ -181,8 +184,8 @@ header{
 			@include border-radius(50%);
 			@include inline-block;
 			text-indent: -9999px;
-			margin-right: 15px;
-			opacity: 0.5;
+			margin-right: 5px;
+			opacity: 0.25;
 			@include square(28px);
 			@include transition(0.3s);
 			&:hover{
