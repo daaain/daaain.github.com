@@ -27,12 +27,22 @@ header{
 			float: none !important;
 		}
 	}
+	.subtitle{
+		margin-top: 0.5em;
+		font-size: 0.75em;
+		max-width: 13em;
+		line-height: 1em;
+		opacity: 0.75;
+		@media screen and (max-width: 600px){
+			font-size: 1em;
+		}
+	}
 	nav{
-		margin-left: 30px;
+		margin-left: 31px;
 		@media screen and (max-width: 1040px){
 			margin-left: 0;
-			margin-top: 15px;
-			float: none !important;
+			margin-top: 5px;
+			float: right !important;
 		}
 		>ul{
 			@media screen and (max-width: 600px){
