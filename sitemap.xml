@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://daaain.github.com/blog/2012/05/17/puts-hello-world/</loc>
+        <loc>http://danieldemmel.me/blog/2012/05/17/puts-hello-world/</loc>
         <lastmod>2012-05-17T22:13:43+01:00</lastmod>
     </url>
     <url>
-        <loc>http://daaain.github.com/blog/2012/05/17/setting-up-octopress/</loc>
+        <loc>http://danieldemmel.me/blog/2012/05/17/setting-up-octopress/</loc>
         <lastmod>2012-05-18T01:55:09+01:00</lastmod>
     </url>
     <url>
-        <loc>http://daaain.github.com/blog/archives/</loc>
+        <loc>http://danieldemmel.me/blog/archives/</loc>
         <lastmod>2012-05-18T01:55:09+01:00</lastmod>
     </url>
     <url>
-        <loc>http://daaain.github.com/</loc>
+        <loc>http://danieldemmel.me/</loc>
         <lastmod>2012-05-18T01:55:09+01:00</lastmod>
     </url>
 </urlset>
