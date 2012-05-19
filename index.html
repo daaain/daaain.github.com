@@ -62,7 +62,7 @@
     <div class="entry">
         <h2>Steps I&#8217;ve taken</h2>
 
-<p>Note: &#8216;username&#8217; is your Github username and &#8216;myblog&#8217; is the name of your blog which you&#8217;ll have to replace in the instructions.</p>
+<p>Note: &#8216;username&#8217; is your Github username and &#8216;myblog&#8217; is the name of your blog / site which you&#8217;ll have to replace in the instructions. Don&#8217;t sweat too much about the latter, it&#8217;s just a project name you won&#8217;t necessary have to use on your site.</p>
 
 <h3>Set up Github repository for hosting</h3>
 
@@ -90,7 +90,16 @@ $ rake install['slash']
 
 <h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">&#8594;</a></h3>
 
-<p>Edit &#8220;Main Configs&#8221; in _config.yml</p>
+<p>Edit at least &#8220;Main Configs&#8221; in _config.yml. You can come back later to fill in the rest.</p>
+
+<h3>Set site up for Github Pages</h3>
+
+<pre><code>$ rake setup_github_pages
+</code></pre>
+
+<p>Paste your Github repo URL: git@github.com:username/username.github.com.git when prompted.</p>
+
+<p>This will set up some folders and the structure of the Git repos. <code>Master</code> branch will track the actual generated website and <code>source</code> will be the sources you are going to edit.</p>
 
 <h3>Create your first post <a href="http://octopress.org/docs/blogging/">&#8594;</a></h3>
 
@@ -100,11 +109,6 @@ $ rake install['slash']
 <p>Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown</p>
 
 <h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">&#8594;</a></h3>
-
-<pre><code>$ rake setup_github_pages
-</code></pre>
-
-<p>Paste your Github repo URL: git@github.com:username/username.github.com.git</p>
 
 <pre><code>$ rake generate
 $ powify create myblog
@@ -198,21 +202,7 @@ $ powify browse myblog
 	<footer class="inner"><span><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img id="creativecommons" alt="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a></span>
   <span>2012 - Daniel Demmel</span>
   <span class="credit"> | Powered by <a href="http://octopress.org">Octopress</a></span>
-  <span class="credit"> | Hosted by <a href="https://github.com"><span>Github</span><img id="octocat" alt="Github logo" src="https://github.com/favicon.ico"></a></span>
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-31862126-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-</footer>
+  <span class="credit"> | Hosted by <a href="https://github.com"><span>Github</span><img id="octocat" alt="Github logo" src="https://github.com/favicon.ico"></a></span></footer>
 	<script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script src="/javascripts/slash.js"></script>
 
@@ -230,6 +220,19 @@ $ powify browse myblog
     }());
 </script>
 
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31862126-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
 
 </body>
