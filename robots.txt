@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: http://danieldemmel.me/sitemap.xml
