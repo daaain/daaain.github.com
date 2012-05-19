@@ -7,7 +7,7 @@ categories:
 ---
 ## Steps I've taken
 
-Note: 'username' is your Github username and 'myblog' is the name of your blog which you'll have to replace in the instructions.
+Note: 'username' is your Github username and 'myblog' is the name of your blog / site which you'll have to replace in the instructions. Don't sweat too much about the latter, it's just a project name you won't necessary have to use on your site.
 
 ### Set up Github repository for hosting
 
@@ -33,7 +33,15 @@ If you don't have it yet, install [rbenv](https://github.com/sstephenson/rbenv#s
 
 ### Configure Octopress [&#8594;](http://octopress.org/docs/configuring/)
 
-Edit "Main Configs" in _config.yml
+Edit at least "Main Configs" in _config.yml. You can come back later to fill in the rest.
+
+### Set site up for Github Pages
+
+    $ rake setup_github_pages
+    
+Paste your Github repo URL: git@github.com:username/username.github.com.git when prompted.
+
+This will set up some folders and the structure of the Git repos. `Master` branch will track the actual generated website and `source` will be the sources you are going to edit.
 
 ### Create your first post [&#8594;](http://octopress.org/docs/blogging/)
 
@@ -42,10 +50,6 @@ Edit "Main Configs" in _config.yml
 Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown
 
 ### Generate page and see it in your browser [&#8594;](http://octopress.org/docs/deploying/github/)
-
-    $ rake setup_github_pages
-    
-Paste your Github repo URL: git@github.com:username/username.github.com.git
 
     $ rake generate
     $ powify create myblog
