@@ -9,11 +9,19 @@
         <lastmod>2012-05-19T14:35:32+01:00</lastmod>
     </url>
     <url>
+        <loc>http://danieldemmel.me/about/</loc>
+        <lastmod>2012-05-20T03:26:37+01:00</lastmod>
+    </url>
+    <url>
         <loc>http://danieldemmel.me/blog/archives/</loc>
         <lastmod>2012-05-19T14:35:32+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/</loc>
         <lastmod>2012-05-19T14:35:32+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://danieldemmel.me/projects/</loc>
+        <lastmod>2012-05-20T03:26:37+01:00</lastmod>
     </url>
 </urlset>
