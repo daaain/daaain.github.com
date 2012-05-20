@@ -18,13 +18,15 @@ header{
 	}
 	a{
 		color: $gray01;
-		@include transition(0.3s);
+		@include transition(color 0.3s);
 		&:hover{
 			color: $main;
 		}
 	}
 	h1{
-		font-weight: 300;
+		font-family: $serif;
+		font-weight: 700;
+		font-style:italic;
 		font-size: 1.7em;
 		@media screen and (max-width: 1040px){
 			float: none !important;
@@ -42,7 +44,9 @@ header{
 		}
 	}
 	nav{
-		margin-left: 31px;
+		margin-left: 32px;
+		font-family: $serif;
+		font-weight: 700;
 		@media screen and (max-width: 1040px){
 			margin-left: 0;
 			margin-top: 5px;
@@ -53,7 +57,7 @@ header{
 				display: none;
 			}
 			>li{
-				margin-left: 50px;
+				margin-left: 30px;
 				@include inline-block;
 				@media screen and (max-width: 1040px){
 					margin-left: 0;

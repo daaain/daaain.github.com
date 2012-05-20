@@ -10,7 +10,9 @@ article{
 		padding: 15px 0;
 	}
 	h1.title{
-		font-weight: 300;
+		font-family: $serif;
+		font-weight: 700;
+		font-style:italic;
 		line-height: 35px;
 		margin-bottom: 20px;
 		a{
@@ -53,7 +55,8 @@ article{
 			margin-top: 10px;	
 		}
 		h2{
-			font-weight: 300;
+			font-family: $serif;
+			font-weight: 700;
 			border-bottom: 1px solid $gray04;
 			position: relative;
 			&:before{
@@ -66,6 +69,8 @@ article{
 		}
 		h3{
 			margin-top: 1em;
+			font-family: $serif;
+			font-weight: 700;
 		}
 		img, video{
 			max-width: 100%;

@@ -1,4 +1,6 @@
-$default: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:700italic,700|PT+Sans&subset=latin,latin-ext,cyrillic);
+$serif: 'Vollkorn', serif;
+$default: "PT Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 $monospace: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
 
 $meta-size: 0.9em;
