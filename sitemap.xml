@@ -2,32 +2,32 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://danieldemmel.me/blog/2012/05/17/puts-hello-world/</loc>
-        <lastmod>2012-05-17T22:13:43+01:00</lastmod>
+        <lastmod>2012-09-02T23:09:52+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/2012/05/17/setting-up-octopress/</loc>
-        <lastmod>2012-05-19T14:35:32+01:00</lastmod>
+        <lastmod>2012-09-02T23:31:31+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/
         </loc>
-        <lastmod>2012-09-02T15:40:18+01:00</lastmod>
+        <lastmod>2012-09-02T23:09:52+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.meabout/</loc>
-        <lastmod>2012-09-02T03:52:01+01:00</lastmod>
+        <lastmod>2012-09-02T23:20:08+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/archives/</loc>
-        <lastmod>2012-09-02T15:40:18+01:00</lastmod>
+        <lastmod>2012-09-02T23:31:31+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/</loc>
-        <lastmod>2012-09-02T15:40:18+01:00</lastmod>
+        <lastmod>2012-09-02T23:31:31+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.meprojects/</loc>
-        <lastmod>2012-09-02T03:56:24+01:00</lastmod>
+        <lastmod>2012-09-02T23:20:08+01:00</lastmod>
     </url>
 </urlset>

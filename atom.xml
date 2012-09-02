@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2012-09-02T15:40:31+01:00</updated>
+  <updated>2012-09-02T23:48:03+01:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -60,19 +60,27 @@
 
 <p>If you don&#8217;t have it yet, install <a href="https://github.com/sstephenson/rbenv#section_2">rbenv</a> and <a href="https://github.com/sstephenson/ruby-build#installing-ruby-build">ruby-build</a> (to handle Ruby runtimes and build gems). If you&#8217;re on Windows this is going to be a bit more complicated, but setting up <a href="http://rubyinstaller.org/downloads">RubyInstaller</a> and <a href="https://github.com/oneclick/rubyinstaller/wiki/Development-Kit">Ruby Development Kit</a> is not that bad.</p>
 
-<pre><code>$ rbenv install 1.9.2-p290
-$ git clone git://github.com/imathis/octopress.git myblog
-$ cd myblog
-$ gem install bundler
-$ rbenv rehash
-$ bundle install
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rbenv install 1.9.2-p290
+</span><span class='line'>$ git clone git://github.com/imathis/octopress.git myblog
+</span><span class='line'>$ cd myblog
+</span><span class='line'>$ gem install bundler
+</span><span class='line'>$ rbenv rehash
+</span><span class='line'>$ bundle install</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Get a nice theme <a href="http://zespia.tw/Octopress-Theme-Slash/">&#8594;</a></h3>
 
-<pre><code>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-$ rake install['slash']
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'>$ rake install['slash']</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">&#8594;</a></h3>
 
@@ -80,8 +88,9 @@ $ rake install['slash']
 
 <h3>Set site up for Github Pages</h3>
 
-<pre><code>$ rake setup_github_pages
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Paste your Github repo URL: git@github.com:username/username.github.com.git when prompted.</p>
 
@@ -89,22 +98,27 @@ $ rake install['slash']
 
 <h3>Create your first post <a href="http://octopress.org/docs/blogging/">&#8594;</a></h3>
 
-<pre><code>$ rake new_post["Hello World!"]
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake new_post["Hello World!"]</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown</p>
 
 <h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">&#8594;</a></h3>
 
-<pre><code>$ rake generate
-$ powify create myblog
-$ powify browse myblog
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake generate
+</span><span class='line'>$ powify create myblog
+</span><span class='line'>$ powify browse myblog</span></code></pre></td></tr></table></div></figure>
+
 
 <p>See if it&#8217;s all good locally</p>
 
-<pre><code>$ rake deploy
-</code></pre>
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Check the real thing: http://username.github.com</p>
 ]]></content>
