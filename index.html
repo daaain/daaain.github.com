@@ -7,7 +7,9 @@
     <meta name="author" content="Daniel Demmel">
 
     
-    <meta name="description" content="Setting Up Octopress Steps I&#8217;ve taken Note: &#8216;username&#8217; is your Github username and &#8216;myblog&#8217; is the name of your blog &hellip;">
+    <meta name="description" content="Setting up rmate with Sublime Text for remote file editing over SSH
+    
+        If you want to be able to edit files using your local &hellip;">
     
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
@@ -23,6 +25,8 @@
 <body>
 	<header class="inner"><h1 class="left"><a href="/">I am dain</a></h1>
 <nav class="menu left"><ul class="main">
+	<li><a href="/about">About</a></li>
+	<li><a href="/projects">Projects</a></li>
 	<li><a href="/blog/archives">Blog archives</a></li>
 </ul>
 </nav>
@@ -58,7 +62,52 @@
 
 
     <article class="post">
-    <h1 class="title"><a href="/blog/2012/05/17/setting-up-octopress/">Setting Up Octopress</a></h1>
+    <h1 class="title"><a href="/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/">Setting up rmate with Sublime Text for remote file editing over SSH</a></h1>
+    <div class="entry">
+        <p>If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
+
+<p>This is how it goes:</p>
+
+<ol>
+<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST2, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
+<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection: <code>RemoteForward 52698 127.0.0.1:52698</code> – see <a href="https://github.com/henrikpersson/rsub#ssh-tunneling">plugin docs</a> for a bit more info</li>
+<li>SSH in to your remote: <code>ssh example_user@123.456.78.90</code></li>
+<li>Download rmate: <code>curl https://raw.github.com/aurora/rmate/master/rmate &gt; rmate</code></li>
+<li>Move it in place: <code>sudo mv rmate /usr/local/bin</code> – you can put in <code>~/bin</code> too if you only want to set it up for yourself, but sharing is caring :)</li>
+<li>Make it executable: <code>sudo chmod +x /usr/local/bin/rmate</code></li>
+<li>Profit: <code>rmate .profile</code> – make sure you have an open ST2 window to enable listening!</li>
+</ol>
+
+
+<p>The main reason why I really like this is because you can also <code>sudo rmate</code> with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with <code>root</code> to be able to do this.</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T02:20:00+01:00" pubdate data-updated="true">2012 Sep 02</time></div>
+        <div class="tags">
+
+</div>
+        
+    </div>
+</article>
+
+
+    <article class="post">
+    <h1 class="title"><a href="/blog/2012/05/17/setting-up-octopress/">Setting up Octopress</a></h1>
     <div class="entry">
         <h2>Steps I&#8217;ve taken</h2>
 
@@ -148,7 +197,7 @@ $ powify browse myblog
 
 
     <article class="post">
-    <h1 class="title"><a href="/blog/2012/05/17/puts-hello-world/">Puts &#8216;Hello World&#8217;</a></h1>
+    <h1 class="title"><a href="/blog/2012/05/17/puts-hello-world/">puts &#8216;Hello world&#8217;</a></h1>
     <div class="entry">
         <p>A brave new blog, this time powered by the impressive dream team of <a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://compass-style.org/">Compass</a>, <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://octopress.org/">Octopress</a> and <a href="https://github.com/">Github</a>.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2012-05-20T03:35:50+01:00</updated>
+  <updated>2012-09-02T03:56:43+01:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up rmate with Sublime Text for remote file editing over SSH]]></title>
+    <link href="http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/"/>
+    <updated>2012-09-02T02:20:00+01:00</updated>
+    <id>http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh</id>
+    <content type="html"><![CDATA[<p>If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
+
+<p>This is how it goes:</p>
+
+<ol>
+<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST2, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
+<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection: <code>RemoteForward 52698 127.0.0.1:52698</code> – see <a href="https://github.com/henrikpersson/rsub#ssh-tunneling">plugin docs</a> for a bit more info</li>
+<li>SSH in to your remote: <code>ssh example_user@123.456.78.90</code></li>
+<li>Download rmate: <code>curl https://raw.github.com/aurora/rmate/master/rmate &gt; rmate</code></li>
+<li>Move it in place: <code>sudo mv rmate /usr/local/bin</code> – you can put in <code>~/bin</code> too if you only want to set it up for yourself, but sharing is caring :)</li>
+<li>Make it executable: <code>sudo chmod +x /usr/local/bin/rmate</code></li>
+<li>Profit: <code>rmate .profile</code> – make sure you have an open ST2 window to enable listening!</li>
+</ol>
+
+
+<p>The main reason why I really like this is because you can also <code>sudo rmate</code> with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with <code>root</code> to be able to do this.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up Octopress]]></title>

@@ -3,15 +3,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>About - I am dain</title>
+    <title>Setting up rmate with Sublime Text for remote file editing over SSH - I am dain</title>
     <meta name="author" content="Daniel Demmel">
 
     
-    <meta name="description" content="About
-    
-    The obligatory third person introduction:
-
-Daniel (aka dain aka daaain) is an experience design technologist and visual &hellip;">
+    <meta name="description" content="Setting up rmate with Sublime Text for remote file editing over SSH
+    If you want to be able to edit files using your local Sublime Text 2 app &hellip;">
     
     <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 
@@ -60,17 +57,46 @@ Daniel (aka dain aka daaain) is an experience design technologist and visual &he
 </div>
 <p class="subtitle">and these are my thoughts mostly on technology</p>
 </header>
-	<div id="content" class="inner"><article class="page">
-    
-    <h1 class="title">About</h1>
-    
-    <div class="entry"><p>The obligatory third person introduction:</p>
+	<div id="content" class="inner"><article class="post">
+    <h1 class="title">Setting up rmate with Sublime Text for remote file editing over SSH</h1>
+    <div class="entry"><p>If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
 
-<p>Daniel (aka dain aka daaain) is an experience design technologist and visual developer, being just as passionate about test driven development as user-centered design. He holds a degree in economics but got drawn into the world of design and development when Photoshop was at 6.0 and Flash was at 5. Lately he&#8217;s been working on HTML applications in which he sees great potential. In his free time he&#8217;s also hacking electronics to make them part of the Internet of Things, though with varying success.</p>
+<p>This is how it goes:</p>
+
+<ol>
+<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST2, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
+<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection: <code>RemoteForward 52698 127.0.0.1:52698</code> – see <a href="https://github.com/henrikpersson/rsub#ssh-tunneling">plugin docs</a> for a bit more info</li>
+<li>SSH in to your remote: <code>ssh example_user@123.456.78.90</code></li>
+<li>Download rmate: <code>curl https://raw.github.com/aurora/rmate/master/rmate &gt; rmate</code></li>
+<li>Move it in place: <code>sudo mv rmate /usr/local/bin</code> – you can put in <code>~/bin</code> too if you only want to set it up for yourself, but sharing is caring :)</li>
+<li>Make it executable: <code>sudo chmod +x /usr/local/bin/rmate</code></li>
+<li>Profit: <code>rmate .profile</code> – make sure you have an open ST2 window to enable listening!</li>
+</ol>
+
+
+<p>The main reason why I really like this is because you can also <code>sudo rmate</code> with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with <code>root</code> to be able to do this.</p>
 </div>
-</article>
+    <div class="meta">
+        <div class="date">
 
-    <div class="share">
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T02:20:00+01:00" pubdate data-updated="true">2012 Sep 02</time></div>
+        <div class="tags">
+
+</div>
+        
+    </div>
+</article>
+<div class="share">
 	<div class="addthis_toolbox addthis_default_style ">
 	
 	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -87,6 +113,11 @@ Daniel (aka dain aka daaain) is an experience design technologist and visual &he
 </div>
 
 
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 	
 <div id="banner" class="inner">
@@ -115,7 +146,10 @@ Daniel (aka dain aka daaain) is an experience design technologist and visual &he
       var disqus_shortname = 'daaain';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/';
+        var disqus_url = 'http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
