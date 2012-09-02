@@ -19,3 +19,7 @@ This is how it goes:
 6. Profit: `rmate .profile` – make sure you have an open ST2 window to enable listening!
 
 The main reason why I really like this is because you can also `sudo rmate` with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with `root` to be able to do this.
+
+Also, don't forget to open the port in your `iptables` if you have a restrictive / whitelist firewall policy: `-A INPUT -p tcp --dport 52698 -j ACCEPT`.
+
+A slightly annoying caveat is that a port can't be shared with other people if you happen to be logged in at the same time, so you might have to set up separate ports in `iptables` with the first port number in the `RemoteForward` setting matching it (the local port should remain the same). In this case you have to specify the port number in each call though: `rmate -p 52699`. So probably the best is to create an alias in your `.profile`: `alias rsub='rmate -p 52699'`, but in this case you also need to add: `alias sudo='sudo '`. By adding that trailing space you make sure that the `sudo`'d command is also checked for alias substitution, so doing `sudo rsub my_system_config_file` will still work.
