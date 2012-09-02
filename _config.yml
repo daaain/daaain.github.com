@@ -77,10 +77,10 @@ twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: true
 twitter_show_follower_count: false
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google +1
-google_plus_one: true
+google_plus_one: false
 google_plus_one_size: medium
 
 # Google Plus Profile
@@ -102,7 +102,7 @@ google_analytics_tracking_id: UA-31862126-1
 
 # Facebook
 facebook_user: daniel.demmel
-facebook_like: true
+facebook_like: false
 
 # AddThis
 addthis_profile_id: ra-4fb5981a7909521f

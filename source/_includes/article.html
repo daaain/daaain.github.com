@@ -21,5 +21,6 @@
         {% if site.disqus_short_name and page.comments == true and site.disqus_show_comment_count == true %}
         <span class="comments"><a href="{{ root_url }}{{ post.url }}#disqus_thread">Comments</a></span>
         {% endif %}
+        {% include post/sharing.html %}
     </div>
 {% endif %}
