@@ -4,6 +4,14 @@ title: Projects
 ---
 ## Web
 
+### 2012 | JSSoundRecorder – Javascript sound collector and music maker
+
+[Open website](http://daaain.github.com/JSSoundRecorder)
+
+<img src="/images/projects/soundcollector.jpg" width="400"></img>
+
+The result of London Music Hack Day 2012. A foray into Web Audio, Web Workers and Binary Blob / File URL APIs, all coming together into a live sound recorder, a sound editor and a simple sequencer, enabling you to quickly record some sounds around you and play around making some simple loops with them.
+
 ### 2012 | Balance Projector – experimental personal finance web app
 
 [Open website](http://daaain.github.com/projector/app/index.html#/projector)
