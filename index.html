@@ -7,9 +7,9 @@
     <meta name="author" content="Daniel Demmel">
 
     
-    <meta name="description" content="Some thoughts on the fragile relationship between nature conservation and economic growth
+    <meta name="description" content="Getting Cross-origin resource sharing with complex jQuery AJAX requests
     
-        As part of the Sustainability &hellip;">
+        I&#8217;m working on an HTML5 desktop application &hellip;">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -62,6 +62,154 @@
 
 
     <article class="post">
+    <h1 class="title"><a href="/blog/2013/01/18/getting-cross-origin-resource-sharing-with-complex-jquery-ajax-requests/">Getting Cross-origin resource sharing with complex jQuery AJAX requests</a></h1>
+    <div class="entry">
+        <p>I&#8217;m working on an HTML5 desktop application which needs to load some HTML text from a server, but not through an existing API. So I had to find a solution which can be set up without too much backend work and make it possible for non-technical people to easily update the content. I&#8217;m assuming that the easiest setup will be using an existing CMS system with a few custom server settings to enable cross-domain communication. It&#8217;s also a security sensitive application, so the content will need to be protected with basic authorisation at least.</p>
+
+<p>Well, let me get things straight: CORS which is more than the simplest GET request is not easy!</p>
+
+<p>While trying to set up and end to end proof of concept to make sure this will work and to be able to advise with setup I ran into several blockers, so I&#8217;m going to go through them step by step.</p>
+
+<h2>Setting up the jQuery AJAX request</h2>
+
+<p>For simple use cases all you need to do to is fire off a simple GET request:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$.ajax({
+</span><span class='line'>  type: 'GET',
+</span><span class='line'>  url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/',
+</span><span class='line'>  success: function(response) {
+</span><span class='line'>      var article = $(response).find('article').html();
+</span><span class='line'>      $('body').html(article);
+</span><span class='line'>  }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the server you&#8217;re hitting is sending back the header <code>Access-Control-Allow-Origin</code> with the value <code>*</code> you&#8217;re all set:</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/atobin/1/embed?live,javascript">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>However what I ended up with is far more complicated, as doing anything with custom headers (which included authorisation) you have to first make a so called <a href="http://www.html5rocks.com/en/tutorials/cors/#toc-handling-a-not-so-simple-request">preflight</a> request. This is an OPTIONS request which only asks the server if it supports all the headers needed for the &#8216;real&#8217; request which follows.</p>
+
+<p>So let&#8217;s first see the full AJAX request:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$.ajax({
+</span><span class='line'>  type: 'GET',
+</span><span class='line'>  url: 'http://www.mydomain.com/myFancyContent.php',
+</span><span class='line'>  headers: {
+</span><span class='line'>      'MyCustomHeader': 'important information'
+</span><span class='line'>  },
+</span><span class='line'>  xhrFields: {
+</span><span class='line'>      withCredentials: true
+</span><span class='line'>  },
+</span><span class='line'>  username: 'myuser',
+</span><span class='line'>  password: 'mypassword',
+</span><span class='line'>  success: function() {
+</span><span class='line'>      console.log('success');
+</span><span class='line'>  },
+</span><span class='line'>  error: function() {
+</span><span class='line'>      console.log('failure');
+</span><span class='line'>  }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>JQuery has some helpers for authorisation, so the easiest way to get it working is setting <code>xhrFields.withCredentials</code> to <code>true</code> and passing <code>username</code> and <code>password</code> as separate parameters, this way we don&#8217;t have to worry about the intricacies of creating the auth hash ourselves.</p>
+
+<p>Another convenience property is <code>headers</code> which you can use to inject any custom headers you might need, without having to manually do it with <code>beforeSend</code>.</p>
+
+<h2>Apache config</h2>
+
+<p>Another big stumbling block for me was to get the settings for Apache right.</p>
+
+<p>The very first thing you need to do is making sure <code>mod_headers</code> is enabled, which can be as simple as:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo a2enmod headers
+</span><span class='line'>$ sudo /etc/init.d/apache2 force-reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once that&#8217;s done, you can either edit your main <code>httpd.conf</code> or <code>apache.conf</code> files, or just create an <code>.htaccess</code> file in the folder you want to enable CORS in.</p>
+
+<p>These are the settings I ended up with after a lot of experimentation:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>SetEnvIf Origin ^(.*)$ ORIGIN_DOMAIN=$0
+</span><span class='line'>&lt;Files "*">
+</span><span class='line'>  Header add Access-Control-Allow-Origin %{ORIGIN_DOMAIN}e
+</span><span class='line'>  Header add Access-Control-Allow-Methods "GET, OPTIONS"
+</span><span class='line'>  Header add Access-Control-Allow-Headers "Authorization, X-Requested-With, Content-Type, Origin, Accept"
+</span><span class='line'>  Header add Access-Control-Allow-Credentials "true"
+</span><span class='line'>&lt;/Files></span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first line makes sure that <code>Origin</code> is echoed back, because as it turns out once you have some custom headers a simple <code>*</code> in <code>Access-Control-Allow-Origin</code> won&#8217;t do any more. You can do some URL filtering here if you want, but this setup makes sure that even <code>file:///</code> works which is great for development.</p>
+
+<p>In <code>Access-Control-Allow-Methods</code> we make sure that <code>OPTIONS</code> will work, and with <code>Access-Control-Allow-Headers</code> and <code>Access-Control-Allow-Credentials</code> we set everything up for a basic authorisation handshake.</p>
+
+<p>Annoyingly none of these worked on the simple HTML file I uploaded, until as a desperate idea after a few hours of futile attempts I tried renaming it to PHP extension which made Apache suddenly apply all of them.</p>
+
+<p>If that wasn&#8217;t enough, the unregistered development HTTPS security certificate also blocked my attempts to get things working. If you open any URL on the server you&#8217;re using and accept the certificate this problem will go away, otherwise the options are to <a href="http://superuser.com/questions/27268/how-do-i-disable-the-warning-chrome-gives-if-a-security-certificate-is-not-trust">install / import the certificate on a system level</a> or to start the browser with some flags like <code>--allow-running-insecure-content</code> for Chrome.</p>
+
+<p>Hope this will help someone else facing the same problems!</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T17:44:00+00:00" pubdate data-updated="true">2013 Jan 18</time></div>
+        <div class="tags">
+
+</div>
+        
+    </div>
+</article>
+
+
+    <article class="post">
     <h1 class="title"><a href="/blog/2012/09/03/some-thoughts-on-the-fragile-relationship-between-nature-conservation-and-economic-growth/">Some thoughts on the fragile relationship between nature conservation and economic growth</a></h1>
     <div class="entry">
         <p>As part of the <a href="https://www.coursera.org/course/sustain">Sustainability course on Coursera</a> I&#8217;m currently taking, I had to write a forum post around population growth. It was inspired by an article about the dwindling richness of sound recordings in nature and tried to articulate some thoughts around incorporating nature conservation into the economy.</p>
@@ -74,7 +222,7 @@
 
 <p>Unfortunately the UN can&#8217;t force any country to do things differently than its often short-sighted politicians decide under the intoxicating lure of lobby money, maybe the best hope for a source of change could be regional supranational entities like the EU? The pollution / renewable energy generation targets mandated on the EU level are the only thing which I can see that is shaking the political elite into the barest minimum of action here in the UK. While the wealth generated here in London is just staggering, the city fails to meet basic air quality standards already pushed back from a few years ago after repeatedly failing to meet them.</p>
 
-<p>I&#8217;m from Hungary in Eastern Europe originally, and having moved to the UK I&#8217;m really sad to see as I travel in the countryside here that the industrial revolution left precious little wild nature on this island. Maybe it&#8217;s actually a boon that Eastern Europe wasn&#8217;t caught up in such a crazy rate of &#8220;development&#8221; that the really important things are ignored and sacrificed on the alter of &#8220;progress&#8221;. Maybe it&#8217;s because of the agrarian heritage which inevitably comes with a level of respect towards nature?</p>
+<p>I&#8217;m from Hungary in Eastern Europe originally, and having moved to the UK I&#8217;m really sad to see as I travel in the countryside here that the industrial revolution left precious little wild nature on this island. Maybe it&#8217;s actually a boon that Eastern Europe wasn&#8217;t caught up in such a crazy rate of &#8220;development&#8221; that the really important things are ignored and sacrificed on the altar of &#8220;progress&#8221;. Maybe it&#8217;s because of the agrarian heritage which inevitably comes with a level of respect towards nature?</p>
 
 <p>In the end I guess my main question is: how could it be possible to include nature as part of the wealth of a nation so that capitalism takes notice?</p></blockquote>
 
@@ -333,7 +481,7 @@
 </script>
 
 	<footer class="inner"><span><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img id="creativecommons" alt="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a></span>
-  <span>2012 - Daniel Demmel</span>
+  <span>2013 - Daniel Demmel</span>
   <span class="credit"> | Powered by <a href="http://octopress.org">Octopress</a></span>
   <span class="credit"> | Hosted by <a href="https://github.com"><span>Github</span><img id="octocat" alt="Github logo" src="https://github.com/favicon.ico"></a></span></footer>
 	<script src="/javascripts/jquery.fancybox.pack.js"></script>
