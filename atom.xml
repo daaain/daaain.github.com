@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2013-01-25T17:15:41+00:00</updated>
+  <updated>2013-01-28T14:01:29+00:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -194,20 +194,32 @@
 
 <p>This is how it goes:</p>
 
-<ol>
+<ul>
 <li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST2, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
-<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection: <code>RemoteForward 52698 127.0.0.1:52698</code> – see <a href="https://github.com/henrikpersson/rsub#ssh-tunneling">plugin docs</a> for a bit more info</li>
-<li>SSH in to your remote: <code>ssh example_user@123.456.78.90</code></li>
+<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection:</li>
+</ul>
+
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>Host myfancyvpn
+</span><span class='line'>  Hostname 123.45.67.89
+</span><span class='line'>  RemoteForward 52698 127.0.0.1:52698</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>SSH in to your remote: <code>ssh myfancyvpn</code></li>
 <li>Download rmate: <code>curl https://raw.github.com/aurora/rmate/master/rmate &gt; rmate</code></li>
 <li>Move it in place: <code>sudo mv rmate /usr/local/bin</code> – you can put in <code>~/bin</code> too if you only want to set it up for yourself, but sharing is caring :)</li>
 <li>Make it executable: <code>sudo chmod +x /usr/local/bin/rmate</code></li>
 <li>Profit: <code>rmate .profile</code> – make sure you have an open ST2 window to enable listening!</li>
-</ol>
+</ul>
 
 
 <p>The main reason why I really like this is because you can also <code>sudo rmate</code> with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with <code>root</code> to be able to do this.</p>
 
-<p>Also, don&#8217;t forget to open the port in your <code>iptables</code> if you have a restrictive / whitelist firewall policy: <code>-A INPUT -p tcp --dport 52698 -j ACCEPT</code>.</p>
+<p>Also, don&#8217;t forget to open the port in your <code>iptables</code> if you have a restrictive / whitelist firewall policy: <code>-A INPUT -p tcp --dport 52698 -j ACCEPT</code>. Also you have to do <code>iptables-save</code> and <code>iptables-restore</code> to <a href="http://askubuntu.com/questions/66890/how-can-i-make-a-specific-set-of-iptables-rules-permanent">make these settings persistent after reboot</a>.</p>
 
 <p>A slightly annoying caveat is that a port can&#8217;t be shared with other people if you happen to be logged in at the same time, so you might have to set up separate ports in <code>iptables</code> with the first port number in the <code>RemoteForward</code> setting matching it (the local port should remain the same). In this case you have to specify the port number in each call though: <code>rmate -p 52699</code>. So probably the best is to create an alias in your <code>.profile</code>: <code>alias rsub='rmate -p 52699'</code>, but in this case you also need to add: <code>alias sudo='sudo '</code>. By adding that trailing space you make sure that the <code>sudo</code>&#8216;d command is also checked for alias substitution, so doing <code>sudo rsub my_system_config_file</code> will still work.</p>
 ]]></content>
