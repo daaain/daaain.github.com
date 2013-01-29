@@ -7,9 +7,9 @@
     <meta name="author" content="Daniel Demmel">
 
     
-    <meta name="description" content="Getting Cross-origin resource sharing with complex jQuery AJAX requests
+    <meta name="description" content="Loading Javascript / CSS files from Jammit&#8217;s assets.yml with Jasmine Gem to avoid duplication
     
-        I&#8217;m working on an HTML5 desktop application &hellip;">
+        Got a really handy one- &hellip;">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -59,6 +59,54 @@
 <p class="subtitle">and these are my thoughts mostly on technology</p>
 </header>
 	<div id="content" class="inner">
+
+
+    <article class="post">
+    <h1 class="title"><a href="/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem/">Loading Javascript / CSS files from Jammit&#8217;s assets.yml with Jasmine Gem to avoid duplication</a></h1>
+    <div class="entry">
+        <p>Got a really handy one-liner working today, but it took me some time to figure out so thought I should post it.</p>
+
+<p>Using the latest Jasmine Gem (only on Github master as of 2013/01/29) you just need to create <code>spec/javascripts/support/jasmine_helper.rb</code> and drop this in there (note that <code>jasmine_helper.rb</code> takes the responsibility of custom configs over from <code>jasmine_config.rb</code> from now on!):</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>require 'yaml'
+</span><span class='line'>require 'erb'
+</span><span class='line'>
+</span><span class='line'>Jasmine.configure do |config|
+</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, YAML.load(ERB.new(File.read('config/assets.yml')).result)['javascripts']['workspace']) }
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What it does is to load <code>assets.yml</code>, parse the YAML array <code>javascripts: workspace:</code>, uses Jasmine&#8217;s <code>PathExpander.expand</code> method to actually glob the files from the paths listed there and finally wraps the whole thing into a lambda so that it acts as a method.</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-29T18:33:00+00:00" pubdate data-updated="true">2013 Jan 29</time></div>
+        <div class="tags">
+
+</div>
+        
+    </div>
+</article>
 
 
     <article class="post">
