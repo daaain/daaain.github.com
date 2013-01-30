@@ -8,7 +8,7 @@
 
     
     <meta name="description" content="Loading Javascript / CSS files from Jammit's assets.yml with Jasmine Gem to avoid duplication
-    Got a really handy one-liner working today, &hellip;">
+    Got a really handy bit of script working today &hellip;">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -59,7 +59,7 @@
 </header>
 	<div id="content" class="inner"><article class="post">
     <h1 class="title">Loading Javascript / CSS files from Jammit's assets.yml with Jasmine Gem to avoid duplication</h1>
-    <div class="entry"><p>Got a really handy one-liner working today, but it took me some time to figure out so thought I should post it.</p>
+    <div class="entry"><p>Got a really handy bit of script working today, but it took me some time to figure out so thought I should post it.</p>
 
 <p>Using the latest Jasmine Gem (only on Github master as of 2013/01/29) you just need to create <code>spec/javascripts/support/jasmine_helper.rb</code> and drop this in there (note that <code>jasmine_helper.rb</code> takes the responsibility of custom configs over from <code>jasmine_config.rb</code> from now on!):</p>
 
@@ -69,11 +69,13 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>require 'yaml'
 </span><span class='line'>require 'erb'
 </span><span class='line'>
 </span><span class='line'>Jasmine.configure do |config|
-</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, YAML.load(ERB.new(File.read('config/assets.yml')).result)['javascripts']['workspace']) }
+</span><span class='line'>  jammitYaml = YAML.load(ERB.new(File.read('config/assets.yml')).result)
+</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, jammitYaml['javascripts']['workspace']) }
 </span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 

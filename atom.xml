@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2013-01-29T18:43:09+00:00</updated>
+  <updated>2013-01-30T00:02:05+00:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -18,7 +18,7 @@
     <link href="http://danieldemmel.me/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem/"/>
     <updated>2013-01-29T18:33:00+00:00</updated>
     <id>http://danieldemmel.me/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem</id>
-    <content type="html"><![CDATA[<p>Got a really handy one-liner working today, but it took me some time to figure out so thought I should post it.</p>
+    <content type="html"><![CDATA[<p>Got a really handy bit of script working today, but it took me some time to figure out so thought I should post it.</p>
 
 <p>Using the latest Jasmine Gem (only on Github master as of 2013/01/29) you just need to create <code>spec/javascripts/support/jasmine_helper.rb</code> and drop this in there (note that <code>jasmine_helper.rb</code> takes the responsibility of custom configs over from <code>jasmine_config.rb</code> from now on!):</p>
 
@@ -28,11 +28,13 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='plain'><span class='line'>require 'yaml'
 </span><span class='line'>require 'erb'
 </span><span class='line'>
 </span><span class='line'>Jasmine.configure do |config|
-</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, YAML.load(ERB.new(File.read('config/assets.yml')).result)['javascripts']['workspace']) }
+</span><span class='line'>  jammitYaml = YAML.load(ERB.new(File.read('config/assets.yml')).result)
+</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, jammitYaml['javascripts']['workspace']) }
 </span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
