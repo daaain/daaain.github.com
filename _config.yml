@@ -94,7 +94,7 @@ pinterest_user: daaain
 
 # Disqus Comments
 disqus_short_name: daaain
-disqus_show_comment_count: false
+disqus_show_comment_count: true
 disqus_developer: 0
 
 # Google Analytics
