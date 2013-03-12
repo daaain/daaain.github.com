@@ -6,6 +6,8 @@ comments: true
 external-url: 
 categories: 
 ---
+*Update: I started a small blog / public notebook of all things sustainable / resilient at [transientresilient.tumblr.com](http://transientresilient.tumblr.com/)*
+
 As part of the [Sustainability course on Coursera](https://www.coursera.org/course/sustain) I'm currently taking, I had to write a forum post around population growth. It was inspired by an article about the dwindling richness of sound recordings in nature and tried to articulate some thoughts around incorporating nature conservation into the economy.
 
 > **While human population might be internally sustainable, what about our lasting impact on nature?**
