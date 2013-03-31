@@ -33,16 +33,22 @@
         <lastmod>2013-01-30T00:01:30+00:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
+        </loc>
+        <lastmod>2013-03-31T00:26:12+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://danieldemmel.meabout/</loc>
         <lastmod>2012-09-02T23:20:08+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/archives/</loc>
-        <lastmod>2013-03-11T22:59:24+00:00</lastmod>
+        <lastmod>2013-03-31T00:26:12+00:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/</loc>
-        <lastmod>2013-03-11T22:59:24+00:00</lastmod>
+        <lastmod>2013-03-31T00:26:12+00:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/projects/</loc>
