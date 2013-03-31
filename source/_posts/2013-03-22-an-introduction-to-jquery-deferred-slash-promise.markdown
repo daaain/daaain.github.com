@@ -1,0 +1,219 @@
+---
+layout: post
+title: "An introduction to jQuery Deferred / Promise and the design pattern in general"
+date: 2013-03-22 10:42
+comments: true
+external-url: 
+categories: 
+---
+
+I gave an introductory talk a while back at the [London Ajax User Group](http://www.meetup.com/londonajax/events/100830572/) about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.
+
+The original presentation is on Github (made with [Keydown](https://github.com/infews/keydown) as presentation engine which doesn't seem to handle resizing well enough to be embeddable): [daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html](http://daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html)
+
+# A convoluted example
+
+As a simple scenario to optimise I set up a not very useful example of loading 2 articles from HTML5Rocks and showing the first sections of each.
+
+<iframe width="100%" height="300" src="http://jsfiddle.net/dain/87uPV/3/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+# So in which cases are Promises useful?
+
+## AJAX request handler spaghetti
+
+``` javascript
+$.ajax({
+  type: 'GET',
+  url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/',
+  success: function(response) {
+    var insertDiv1 = $('<div></div>');
+    insertDiv1.html($(response).find('section').html());
+    $.ajax({
+      type: 'GET',
+      url: 'http://www.html5rocks.com/en/tutorials/audio/scheduling/',
+      success: function(response) {
+        var insertDiv2 = $('<div></div>');
+        insertDiv2.html($(response).find('section').html());
+        $('body').append(insertDiv1, '<hr/>', insertDiv2);
+              } 
+    });
+  } 
+});
+```
+
+## Timing issues (DOM ready, animations, etc)
+
+``` javascript
+$(document).ready(function () {
+  $.ajax({
+    type: 'GET',
+    url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/',
+    success: function(response) {
+      var insertDiv1 = $('<div></div>');
+      insertDiv1.html($(response).find('section').html());
+      $.ajax({
+        type: 'GET',
+        url: 'http://www.html5rocks.com/en/tutorials/audio/scheduling/',
+        success: function(response) {
+          var insertDiv2 = $('<div></div>');
+          insertDiv2.html($(response).find('section').html());
+          $('body').append(insertDiv1, '<hr/>', insertDiv2);
+        }
+      });
+    }
+  });
+});
+```
+
+# But what these Deferreds and Promises are really?
+
+## Deferred
+
+* A proxy for an asynchronous, future event
+* Has an interface for getting `resolve()`d or `reject()`ed
+* Starts in `pending` state, can only be finished once
+* Calls listeners immediately (but always async) once resolved
+
+## Promise
+
+* Allows listening and state inspection (using `state()`), but completely immutable so no interface for resolution
+* Basic (jQuery specific) listeners are `done()` and `fail()`
+* Can be chained with `then()` (used to be `pipe()`)
+* Can be grouped and processed using `$.when()`
+
+# How do they work?
+
+## A canonical Deferred example
+
+Setting up a listener and triggering it with resolve:
+
+``` javascript
+var deferred = $.Deferred();
+
+deferred.done(function(value) {
+   alert(value);
+});
+
+deferred.resolve("hello world");
+```
+
+This also works as it doesn't matter if a Deferred is already resolved it will still trigger the callback we attach to it:
+
+``` javascript
+var deferred = $.Deferred();
+
+deferred.resolve("hello world");
+
+deferred.done(function(value) {
+   alert(value);
+});
+```
+
+## A canonical Promise + When example
+
+Return a Promise from a method and attach a listener to it (can have more than one):
+
+``` javascript
+function getPromise() {
+  var deferred = $.Deferred();
+  
+  setTimeout(function(){
+    deferred.resolve("hurray");
+  }, 1000);
+  
+  return deferred.promise();
+}
+
+$.when( getPromise() ).done(function(value) {
+   alert(value);
+});
+```
+
+## So let's untangle our example
+
+Create a Promise for DOM ready and the two AJAX requests and wait for all of them to be fulfilled:
+
+``` javascript
+function getReady() {
+  var deferredReady = $.Deferred();
+  $(document).ready(function() {
+    deferredReady.resolve();
+  });
+  return deferredReady.promise();
+}
+
+var firstRequest = $.ajax({ url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/' }),
+    secondRequest = $.ajax({ url: 'http://www.html5rocks.com/en/tutorials/audio/scheduling/' });
+
+$.when( getReady(), firstRequest, secondRequest
+).done( function( readyResponse, firstResponse, secondResponse ) {
+  var insertDiv1 = $('<div></div>');
+  insertDiv1.html($(firstResponse[0]).find('section').html());
+  var insertDiv2 = $('<div></div>');
+  insertDiv2.html($(secondResponse[0]).find('section').html());
+  $('body').append(insertDiv1, '<hr/>', insertDiv2);
+});
+```
+
+## Another solution
+
+The AJAX request can be already fired off while we wait for the DOM (also showing how can we chain listeners with `then()`):
+
+``` javascript
+function getReady() {
+  var deferredReady = $.Deferred();
+  $(document).ready(function() {
+    deferredReady.resolve();
+  });
+  return deferredReady.promise();
+}
+
+var firstRequest = $.ajax({ url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/' }),
+    secondRequest = $.ajax({ url: 'http://www.html5rocks.com/en/tutorials/audio/scheduling/' }),
+    firstDiv,
+    secondDiv;
+
+$.when( firstRequest, secondRequest
+).then( function( firstResponse, secondResponse ) {
+  firstDiv = $('<div></div>').html($(firstResponse[0]).find('section').html());
+  secondDiv = $('<div></div>').html($(secondResponse[0]).find('section').html());
+  return getReady();
+}).done( function( readyResponse, firstResponse, secondResponse ) {
+  $('body').append(firstDiv, '<hr/>', secondDiv);
+});
+```
+
+# Dealing with rejection
+
+When a Promise gets `reject()`ed it will immediately cascade down the `then()` chain so you only need to handle it at the end (with jQuery it's only since 1.8+ though).
+
+```
+getTweetsFor("domenic") // promise-returning function
+  .then(function (tweets) {
+    var shortUrls = parseTweetsForUrls(tweets);
+    var mostRecentShortUrl = shortUrls[0];
+    return expandUrlUsingTwitterApi(mostRecentShortUrl); // promise-returning function
+  })
+  .then(httpGet) // promise-returning function
+  .then(
+    function (responseBody) {
+      console.log("Most recent link text:", responseBody);
+    },
+    function (error) {
+      console.error("Error with the twitterverse:", error);
+    }
+  );
+```
+
+I've taken this example from [Domenic Denicola's blog post "You're Missing the Point of Promises"](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/) which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now! 
+
+# A few more pointers
+
+* In case there's a long request you can send updates to a `progress()` listener using `notify()`
+* You can insert transformations into the `then()` chain
+``` javascript
+$.when( { testing: 123 } ).done(
+  function(x) { alert(x.testing); } /* alerts "123" */
+);
+```
+* And finally it must be said that jQuery Deferred is by far not the only one, see [Promises/A spec](http://wiki.commonjs.org/wiki/Promises/A) and the clarified [Promises/A+ spec](http://promises-aplus.github.com/promises-spec/). If you're not already using jQuery then [Q](https://github.com/kriskowal/q), [rsvp.js](https://github.com/tildeio/rsvp.js) or [when](https://github.com/cujojs/when) might be better alternatives with seamless interoperability due to stricter adherence to the CommonJS specs.
