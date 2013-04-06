@@ -68,16 +68,16 @@
 
 <p>The original presentation is on Github (made with <a href="https://github.com/infews/keydown">Keydown</a> as presentation engine which doesn&#8217;t seem to handle resizing well enough to be embeddable): <a href="http://daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html">daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html</a></p>
 
-<h1>A convoluted example</h1>
+<h2>A simple CORS AJAX example</h2>
 
 <p>As a simple scenario to optimise I set up a not very useful example of loading 2 articles from HTML5Rocks and showing the first sections of each.</p>
 
 <iframe width="100%" height="300" src="http://jsfiddle.net/dain/87uPV/3/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 
-<h1>So in which cases are Promises useful?</h1>
+<h2>So in which cases are Promises useful?</h2>
 
-<h2>AJAX request handler spaghetti</h2>
+<h3>AJAX request handler spaghetti</h3>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -116,7 +116,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Timing issues (DOM ready, animations, etc)</h2>
+<h3>Timing issues (DOM ready, animations, etc)</h3>
 
 <figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -159,9 +159,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h1>But what these Deferreds and Promises are really?</h1>
+<h2>But what are these Deferreds and Promises really?</h2>
 
-<h2>Deferred</h2>
+<h3>Deferred</h3>
 
 <ul>
 <li>A proxy for an asynchronous, future event</li>
@@ -171,7 +171,7 @@
 </ul>
 
 
-<h2>Promise</h2>
+<h3>Promise</h3>
 
 <ul>
 <li>Allows listening and state inspection (using <code>state()</code>), but completely immutable so no interface for resolution</li>
@@ -181,9 +181,9 @@
 </ul>
 
 
-<h1>How do they work?</h1>
+<h2>How do they work?</h2>
 
-<h2>A canonical Deferred example</h2>
+<h3>A canonical Deferred example</h3>
 
 <p>Setting up a listener and triggering it with resolve:</p>
 
@@ -223,7 +223,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>A canonical Promise + When example</h2>
+<h3>A canonical Promise + When example</h3>
 
 <p>Return a Promise from a method and attach a listener to it (can have more than one):</p>
 
@@ -256,7 +256,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>So let&#8217;s untangle our example</h2>
+<h3>So let&#8217;s untangle our example</h3>
 
 <p>Create a Promise for DOM ready and the two AJAX requests and wait for all of them to be fulfilled:</p>
 
@@ -301,7 +301,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Another solution</h2>
+<h3>Another solution</h3>
 
 <p>The AJAX request can be already fired off while we wait for the DOM (also showing how can we chain listeners with <code>then()</code>):</p>
 
@@ -350,7 +350,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h1>Dealing with rejection</h1>
+<h2>Dealing with rejection</h2>
 
 <p>When a Promise gets <code>reject()</code>ed it will immediately cascade down the <code>then()</code> chain so you only need to handle it at the end (with jQuery it&#8217;s only since 1.8+ though).</p>
 
@@ -388,7 +388,7 @@
 
 <p>I&#8217;ve taken this example from <a href="http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/">Domenic Denicola&#8217;s blog post &#8220;You&#8217;re Missing the Point of Promises&#8221;</a> which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now!</p>
 
-<h1>A few more pointers</h1>
+<h2>A few more pointers</h2>
 
 <ul>
 <li>In case there&#8217;s a long request you can send updates to a <code>progress()</code> listener using <code>notify()</code></li>
