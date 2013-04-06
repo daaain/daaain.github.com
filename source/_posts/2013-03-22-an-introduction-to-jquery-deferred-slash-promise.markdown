@@ -11,15 +11,15 @@ I gave an introductory talk a while back at the [London Ajax User Group](http://
 
 The original presentation is on Github (made with [Keydown](https://github.com/infews/keydown) as presentation engine which doesn't seem to handle resizing well enough to be embeddable): [daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html](http://daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html)
 
-# A convoluted example
+## A simple CORS AJAX example
 
 As a simple scenario to optimise I set up a not very useful example of loading 2 articles from HTML5Rocks and showing the first sections of each.
 
 <iframe width="100%" height="300" src="http://jsfiddle.net/dain/87uPV/3/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-# So in which cases are Promises useful?
+## So in which cases are Promises useful?
 
-## AJAX request handler spaghetti
+### AJAX request handler spaghetti
 
 ``` javascript
 $.ajax({
@@ -41,7 +41,7 @@ $.ajax({
 });
 ```
 
-## Timing issues (DOM ready, animations, etc)
+### Timing issues (DOM ready, animations, etc)
 
 ``` javascript
 $(document).ready(function () {
@@ -65,25 +65,25 @@ $(document).ready(function () {
 });
 ```
 
-# But what these Deferreds and Promises are really?
+## But what are these Deferreds and Promises really?
 
-## Deferred
+### Deferred
 
 * A proxy for an asynchronous, future event
 * Has an interface for getting `resolve()`d or `reject()`ed
 * Starts in `pending` state, can only be finished once
 * Calls listeners immediately (but always async) once resolved
 
-## Promise
+### Promise
 
 * Allows listening and state inspection (using `state()`), but completely immutable so no interface for resolution
 * Basic (jQuery specific) listeners are `done()` and `fail()`
 * Can be chained with `then()` (used to be `pipe()`)
 * Can be grouped and processed using `$.when()`
 
-# How do they work?
+## How do they work?
 
-## A canonical Deferred example
+### A canonical Deferred example
 
 Setting up a listener and triggering it with resolve:
 
@@ -109,7 +109,7 @@ deferred.done(function(value) {
 });
 ```
 
-## A canonical Promise + When example
+### A canonical Promise + When example
 
 Return a Promise from a method and attach a listener to it (can have more than one):
 
@@ -129,7 +129,7 @@ $.when( getPromise() ).done(function(value) {
 });
 ```
 
-## So let's untangle our example
+### So let's untangle our example
 
 Create a Promise for DOM ready and the two AJAX requests and wait for all of them to be fulfilled:
 
@@ -155,7 +155,7 @@ $.when( getReady(), firstRequest, secondRequest
 });
 ```
 
-## Another solution
+### Another solution
 
 The AJAX request can be already fired off while we wait for the DOM (also showing how can we chain listeners with `then()`):
 
@@ -183,7 +183,7 @@ $.when( firstRequest, secondRequest
 });
 ```
 
-# Dealing with rejection
+## Dealing with rejection
 
 When a Promise gets `reject()`ed it will immediately cascade down the `then()` chain so you only need to handle it at the end (with jQuery it's only since 1.8+ though).
 
@@ -207,7 +207,7 @@ getTweetsFor("domenic") // promise-returning function
 
 I've taken this example from [Domenic Denicola's blog post "You're Missing the Point of Promises"](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/) which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now! 
 
-# A few more pointers
+## A few more pointers
 
 * In case there's a long request you can send updates to a `progress()` listener using `notify()`
 * You can insert transformations into the `then()` chain
