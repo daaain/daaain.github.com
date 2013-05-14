@@ -14,12 +14,12 @@ This is how it goes:
 * Add a remote forwarding line under the right host in your `~/.ssh/config` file to enable connection:
 
 ```
-Host myfancyvpn
+Host myfancyvps
   Hostname 123.45.67.89
   RemoteForward 52698 127.0.0.1:52698
 ```
 
-* SSH in to your remote: `ssh myfancyvpn`
+* SSH in to your remote: `ssh myfancyvps`
 * Download rmate: `curl https://raw.github.com/aurora/rmate/master/rmate > rmate`
 * Move it in place: `sudo mv rmate /usr/local/bin` – you can put in `~/bin` too if you only want to set it up for yourself, but sharing is caring :)
 * Make it executable: `sudo chmod +x /usr/local/bin/rmate`
