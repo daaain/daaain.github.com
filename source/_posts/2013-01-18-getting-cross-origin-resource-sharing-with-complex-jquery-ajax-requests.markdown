@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Getting Cross-origin resource sharing with complex jQuery AJAX requests"
+description: "AJAX with cross-origin resource sharing can be tricky, especially if you need to do something beyond the basics like authorisation or custom headers."
 date: 2013-01-18 17:44
 comments: true
 external-url: 
-categories: 
+categories: [development, jquery, javascript, cors]
 ---
 I'm working on an HTML5 desktop application which needs to load some HTML text from a server, but not through an existing API. So I had to find a solution which can be set up without too much backend work and make it possible for non-technical people to easily update the content. I'm assuming that the easiest setup will be using an existing CMS system with a few custom server settings to enable cross-domain communication. It's also a security sensitive application, so the content will need to be protected with basic authorisation at least.
 

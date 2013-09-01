@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Setting up rmate with Sublime Text for remote file editing over SSH"
+description: "Instead of terminal editors with steep learning curve, this guide helps you to tunnel Sublime Text in to your server for remote editing. With sudo!"
 date: 2012-09-02 02:20
 comments: true
 external-url: 
-categories: 
+categories: [development, tools, sublimetext, ssh]
 ---
 If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use `rmate` which is a small remote connection script developed originally for TextMate.
 

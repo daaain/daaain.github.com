@@ -4,7 +4,7 @@ title: "Some thoughts on the fragile relationship between nature conservation an
 date: 2012-09-03 23:18
 comments: true
 external-url: 
-categories: 
+categories: [sustainability, nature, economy]
 ---
 *Update: I started a small blog / public notebook of all things sustainable / resilient at [transientresilient.tumblr.com](http://transientresilient.tumblr.com/)*
 

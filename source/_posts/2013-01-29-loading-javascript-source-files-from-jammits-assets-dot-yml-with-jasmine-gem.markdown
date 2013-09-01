@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Loading Javascript / CSS files from Jammit's assets.yml with Jasmine Gem to avoid duplication"
+description: "Both unit testing and minification needs to find source files, so in order to avoid duplication you can share patterns between Jasmine and Jammit."
 date: 2013-01-29 18:33
 comments: true
 external-url: 
-categories: 
+categories: [development, tools, ruby]
 ---
 Got a really handy bit of script working today, but it took me some time to figure out so thought I should post it.
 

@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "An introduction to jQuery Deferred / Promise and the design pattern in general"
+description: "A comprehensive tutorial to the Deferred / Promise pattern in JavaScript using jQuery. Lot of code examples and video of the talk I gave (with slides)"
 date: 2013-03-22 10:42
 comments: true
 external-url: 
-categories: 
+categories: [development, jquery, javascript, patterns]
 ---
 
 I gave an introductory talk a while back at the [London Ajax User Group](http://www.meetup.com/londonajax/events/100830572/) about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.

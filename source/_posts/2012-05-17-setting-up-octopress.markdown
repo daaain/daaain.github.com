@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Setting up Octopress"
+description: "Step by step guide how to set up Octopress blogging engine hosted on Github Pages. No database, Markdown for content and lightweight Ruby templating."
 date: 2012-05-17 22:18
 comments: true
-categories: 
+categories: [development, ruby, github, octopress]
 ---
 ## Steps I've taken
 
