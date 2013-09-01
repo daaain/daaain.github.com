@@ -10,6 +10,12 @@ categories: [development, jquery, javascript, patterns]
 
 I gave an introductory talk a while back at the [London Ajax User Group](http://www.meetup.com/londonajax/events/100830572/) about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.
 
+Update (2012/09/01): As it turns out there was a nice video recorded of the talk, if you have 10 minutes free give it a watch!
+
+<div class="video-container">
+  <iframe src="//player.vimeo.com/video/73539595?color=c9ff23" width="400" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/73539595">Introduction to jQuery Promises / Deferreds - London Ajax User Group 12.02.2013.</a> from <a href="http://vimeo.com/daaain">Daniel Demmel</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</div>
+
 The original presentation is on Github (made with [Keydown](https://github.com/infews/keydown) as presentation engine which doesn't seem to handle resizing well enough to be embeddable): [daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html](http://daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html)
 
 ## A simple CORS AJAX example
