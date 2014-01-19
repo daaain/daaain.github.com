@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2013-11-23T01:56:31+00:00</updated>
+  <updated>2014-01-19T02:23:02+00:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Build your Minimum Viable Product]]></title>
+    <link href="http://danieldemmel.me/blog/2014/01/19/build-your-minimum-viable-product/"/>
+    <updated>2014-01-19T01:27:00+00:00</updated>
+    <id>http://danieldemmel.me/blog/2014/01/19/build-your-minimum-viable-product</id>
+    <content type="html"><![CDATA[<p>I gave a talk about building and iterating an MVP at the brilliant Workplace Hackshop organised by <a href="http://www.hackhumanity.org/">HackHumanity</a>.</p>
+
+<p>It&#8217;s a short presentation so take a look, but these are the just the main points for the busiest executives:</p>
+
+<ul>
+<li>Form key hypotheses – optimise for learning, not functionality</li>
+<li>Express your main value proposition</li>
+<li>Get it out – if you’re not ashamed of it you wasted time</li>
+<li>Measure every user interaction</li>
+<li>Know where your audience hangs out</li>
+<li>Look for customers ready to pay</li>
+<li>Fake it, kludge it, hack it together</li>
+</ul>
+
+
+<hr />
+
+<script async class="speakerdeck-embed" data-id="a48d1b7062080131f8545aa390b2a9d4" data-ratio="1.62025316455696" src="http://danieldemmel.me//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[An introduction to jQuery Deferred / Promise and the design pattern in general]]></title>
