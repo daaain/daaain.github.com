@@ -21,7 +21,7 @@ Host myfancyvps
 ```
 
 * SSH in to your remote: `ssh myfancyvps`
-* Download rmate: `curl https://raw.github.com/aurora/rmate/master/rmate > rmate`
+* Download rmate: `curl https://raw.githubusercontent.com/aurora/rmate/master/rmate > rmate`
 * Move it in place: `sudo mv rmate /usr/local/bin` – you can put in `~/bin` too if you only want to set it up for yourself, but sharing is caring :)
 * Make it executable: `sudo chmod +x /usr/local/bin/rmate`
 * Profit: `rmate .profile` – make sure you have an open ST2 window to enable listening!

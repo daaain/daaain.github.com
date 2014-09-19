@@ -27,6 +27,7 @@ $ cd myblog
 $ gem install bundler
 $ rbenv rehash
 $ bundle install
+$ rbenv rehash
 ```
 
 ### Get a nice theme [&#8594;](http://zespia.tw/Octopress-Theme-Slash/)
@@ -48,7 +49,7 @@ $ rake setup_github_pages
     
 Paste your Github repo URL: git@github.com:username/username.github.com.git when prompted.
 
-This will set up some folders and the structure of the Git repos. `Master` branch will track the actual generated website and `source` will be the sources you are going to edit.
+This will set up some folders and the structure of the Git repos. `Master` branch will track the actual generated website (the contents of `_deploy` folder) and `source` will be the sources you are going to edit.
 
 ### Create your first post [&#8594;](http://octopress.org/docs/blogging/)
 
