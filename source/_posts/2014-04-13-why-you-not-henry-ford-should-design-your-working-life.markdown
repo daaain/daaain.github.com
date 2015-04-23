@@ -38,7 +38,7 @@ What really changed my way of thinking about time is a brilliant and provocative
 
 If you want a second opinion or to dig deeper, also take a look at the Institute for the Future's [Future of Work study][4].
 
-![Credits: © 2015 Institute for the Future | http://www.iftf.org/our-work/people-technology/technology-horizons/the-future-of-work/](http://www.iftf.org/fileadmin/user_upload/images/More_Projects_Images/TH-FutureofWork.jpg)
+![Credits: © 2015 Institute for the Future | http://www.iftf.org/our-work/people-technology/technology-horizons/the-future-of-work/](../images/posts/TH-FutureofWork.png)
 
 ## So what do I do?
 
