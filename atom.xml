@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2015-04-23T19:59:01+01:00</updated>
+  <updated>2015-08-14T09:13:40+01:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Containerise everything]]></title>
+    <link href="http://danieldemmel.me/blog/2015/08/14/containerise-everything/"/>
+    <updated>2015-08-14T09:11:00+01:00</updated>
+    <id>http://danieldemmel.me/blog/2015/08/14/containerise-everything</id>
+    <content type="html"><![CDATA[<h2>Why you should stop installing development environment locally</h2>
+
+<p>This is a placeholder post in which later I&#8217;ll share my talk about containers and Docker from the <a href="http://redevelop.io">re:develop conference</a> in Bournemouth.</p>
+
+<p>In the meanwhile have a look at the <a href="https://github.com/ustwo/docker-node-boilerplate">companion repository on Github</a>, which shows how to set up a Node based development environment with Docker.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why YOU — not Henry Ford — should design your working life]]></title>
@@ -30,7 +43,7 @@
 
 <blockquote><p>Chances are that you also earn more than what you <strong>really need</strong>, to spend the surplus on stuff you <strong>want but don&#8217;t need</strong> or have the time to enjoy anyway.</p></blockquote>
 
-<p>Funnily, some of the nicest things which you <em>do actually</em> <em>need</em> and <a href="https://medium.com/@kidbombay/how-to-be-happy-be8b2dc0677">can really make you happy</a> don&#8217;t cost a lot of money: taking a walk in nature, relaxing with people you like, cooking some fresh food from scratch, giving time to enjoy the meal together with your family and friends immersed in conversations, or keeping a gratitude journal.</p>
+<p>Funnily, some of the nicest things which you <em>do actually</em> <em>need</em> and <a href="https://medium.com/@kidbombay/how-to-be-happy-be8b2dc0677">can really make you happy</a> <a href="http://time.com/3950042/things-make-you-happier/">(as science shows)</a> don&#8217;t cost a lot of money: taking a walk in nature, relaxing with people you like, cooking some fresh food from scratch, giving time to enjoy the meal together with your family and friends immersed in conversations, or keeping a gratitude journal.</p>
 
 <p>So why do we still choose to join the rush hour congestion every day, and with that, collectively invest in expensive and destructive infrastructure developments just to serve these one-hour time windows? Or, why do we create a binary choice between unemployment and low paid jobs or burning out with no time to rest in sight until we retire, being too old and ill to enjoy it?</p>
 
@@ -677,12 +690,12 @@
     <link href="http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/"/>
     <updated>2012-09-02T02:20:00+01:00</updated>
     <id>http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh</id>
-    <content type="html"><![CDATA[<p>If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
+    <content type="html"><![CDATA[<p>If you want to be able to edit files using your local Sublime Text 2 / 3 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
 
 <p>This is how it goes:</p>
 
 <ul>
-<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST2, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
+<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
 <li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection:</li>
 </ul>
 
