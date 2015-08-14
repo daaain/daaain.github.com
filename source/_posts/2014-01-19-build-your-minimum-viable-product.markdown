@@ -4,7 +4,7 @@ title: "Build your Minimum Viable Product"
 date: 2014-01-19 01:27
 comments: true
 external-url: 
-categories: 
+categories: [business, product, startup]
 ---
 I gave a talk about building and iterating an MVP at the brilliant Workplace Hackshop organised by [HackHumanity](http://www.hackhumanity.org/).
 

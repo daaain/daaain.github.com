@@ -5,13 +5,13 @@ description: "Instead of terminal editors with steep learning curve, this guide 
 date: 2012-09-02 02:20
 comments: true
 external-url: 
-categories: [development, tools, sublimetext, ssh]
+categories: [web, development, tools, sublimetext, ssh]
 ---
-If you want to be able to edit files using your local Sublime Text 2 app over SSH, you can use `rmate` which is a small remote connection script developed originally for TextMate.
+If you want to be able to edit files using your local Sublime Text 2 / 3 app over SSH, you can use `rmate` which is a small remote connection script developed originally for TextMate.
 
 This is how it goes:
 
-* Install the [rsub](https://github.com/henrikpersson/rsub) plugin for ST2, which is available through [Package Control](http://wbond.net/sublime_packages/package_control) too.
+* Install the [rsub](https://github.com/henrikpersson/rsub) plugin for ST, which is available through [Package Control](http://wbond.net/sublime_packages/package_control) too.
 * Add a remote forwarding line under the right host in your `~/.ssh/config` file to enable connection:
 
 ```

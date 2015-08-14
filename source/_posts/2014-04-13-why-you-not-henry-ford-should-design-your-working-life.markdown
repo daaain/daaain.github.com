@@ -18,7 +18,7 @@ Much of my argument doesn't apply if you're struggling with low pay, shift-based
 
 > Chances are that you also earn more than what you **really need**, to spend the surplus on stuff you **want but don't need** or have the time to enjoy anyway.
 
-Funnily, some of the nicest things which you _do actually_ _need_ and [can really make you happy][2] don't cost a lot of money: taking a walk in nature, relaxing with people you like, cooking some fresh food from scratch, giving time to enjoy the meal together with your family and friends immersed in conversations, or keeping a gratitude journal.
+Funnily, some of the nicest things which you _do actually_ _need_ and [can really make you happy][2] [(as science shows)][7] don't cost a lot of money: taking a walk in nature, relaxing with people you like, cooking some fresh food from scratch, giving time to enjoy the meal together with your family and friends immersed in conversations, or keeping a gratitude journal.
 
 So why do we still choose to join the rush hour congestion every day, and with that, collectively invest in expensive and destructive infrastructure developments just to serve these one-hour time windows? Or, why do we create a binary choice between unemployment and low paid jobs or burning out with no time to rest in sight until we retire, being too old and ill to enjoy it?
 
@@ -74,3 +74,4 @@ This post was published originally on the ustwo blog: [http://ustwo.com/blog/you
 [4]: http://www.iftf.org/our-work/people-technology/technology-horizons/the-future-of-work/
 [5]: https://www.gov.uk/flexible-working
 [6]: http://iwtmad.files.wordpress.com/2012/12/the-living-legacy-workbook6.pdf
+[7]: http://time.com/3950042/things-make-you-happier/

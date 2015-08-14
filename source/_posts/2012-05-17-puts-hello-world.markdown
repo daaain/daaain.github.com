@@ -3,7 +3,7 @@ layout: post
 title: "puts 'Hello world'"
 date: 2012-05-17 21:48
 comments: true
-categories: [development, ruby, github, markdown]
+categories: [web, development, ruby, github, markdown]
 ---
 A brave new blog, this time powered by the impressive dream team of [Ruby](http://www.ruby-lang.org/), [Compass](http://compass-style.org/), [Jekyll](http://jekyllrb.com/), [Octopress](http://octopress.org/) and [Github](https://github.com/).
 

@@ -5,7 +5,7 @@ description: "A comprehensive tutorial to the Deferred / Promise pattern in Java
 date: 2013-03-22 10:42
 comments: true
 external-url: 
-categories: [development, jquery, javascript, patterns]
+categories: [web, development, jquery, javascript, patterns]
 ---
 
 I gave an introductory talk a while back at the [London Ajax User Group](http://www.meetup.com/londonajax/events/100830572/) about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.
