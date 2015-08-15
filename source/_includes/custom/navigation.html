@@ -3,3 +3,14 @@
 	<li><a href="{{ root_url }}/projects">Projects</a></li>
 	<li><a href="{{ root_url }}/blog/archives">Blog archives</a></li>
 </ul>
+<script>
+	window.changeEventHandler = function(event) {
+		location.href = event.target.value;
+	}
+</script>
+<select name="mobile-menu" onchange="changeEventHandler(event);">
+	<option selected="selected">Menu</option>
+	<option value="{{ root_url }}/about">About</option>
+	<option value="{{ root_url }}/projects">Projects</option>
+	<option value="{{ root_url }}/blog/archives">Blog archives</option>
+</select>
