@@ -38,7 +38,7 @@ What really changed my way of thinking about time is a brilliant and provocative
 
 If you want a second opinion or to dig deeper, also take a look at the Institute for the Future's [Future of Work study][4].
 
-![Credits: © 2015 Institute for the Future | http://www.iftf.org/our-work/people-technology/technology-horizons/the-future-of-work/](../images/posts/TH-FutureofWork.png)
+[![Credits: © 2015 Institute for the Future | http://www.iftf.org/our-work/people-technology/technology-horizons/the-future-of-work/][8]][8]
 
 ## So what do I do?
 
@@ -75,3 +75,4 @@ This post was published originally on the ustwo blog: [http://ustwo.com/blog/you
 [5]: https://www.gov.uk/flexible-working
 [6]: http://iwtmad.files.wordpress.com/2012/12/the-living-legacy-workbook6.pdf
 [7]: http://time.com/3950042/things-make-you-happier/
+[8]: /images/posts/TH-FutureofWork.png (Open full size image)

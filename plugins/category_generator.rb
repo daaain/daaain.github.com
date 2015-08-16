@@ -152,7 +152,7 @@ module Jekyll
       categories = categories.sort!.map do |item|
         url = item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase
         url = "#{dir}/#{url}" unless dir.nil? or dir.empty?
-        "<a class='category' href='/#{url}/'>#{item}</a>"
+        "<a class='category p-category' href='/#{url}/'>#{item}</a>"
       end
 
       case categories.length
