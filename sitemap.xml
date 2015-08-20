@@ -2,70 +2,74 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://danieldemmel.me/blog/2012/05/17/puts-hello-world/</loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/2012/05/17/setting-up-octopress/</loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/
         </loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2012/09/03/some-thoughts-on-the-fragile-relationship-between-nature-conservation-and-economic-growth/
         </loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2013/01/18/getting-cross-origin-resource-sharing-with-complex-jquery-ajax-requests/
         </loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem/
         </loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
         </loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/2014/01/19/build-your-minimum-viable-product/</loc>
-        <lastmod>2015-08-14T18:46:11+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://danieldemmel.me/blog/2014/04/13/why-you-not-henry-ford-should-design-your-working-life/
         </loc>
-        <lastmod>2015-08-15T14:12:18+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/2015/08/14/containerise-everything/</loc>
-        <lastmod>2015-08-15T13:02:20+01:00</lastmod>
+        <lastmod>2015-08-20T10:07:59+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://danieldemmel.me/blog/2015/08/16/indiewebify-yourself/</loc>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/about/</loc>
-        <lastmod>2015-08-16T12:07:46+01:00</lastmod>
+        <lastmod>2015-08-20T10:06:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/blog/archives/</loc>
-        <lastmod>2015-08-15T14:12:18+01:00</lastmod>
+        <lastmod>2015-08-20T10:07:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/</loc>
-        <lastmod>2015-08-15T14:13:31+01:00</lastmod>
+        <lastmod>2015-08-20T10:07:59+01:00</lastmod>
     </url>
     <url>
         <loc>http://danieldemmel.me/projects/</loc>
-        <lastmod>2014-01-15T16:35:15+00:00</lastmod>
+        <lastmod>2015-08-20T10:15:48+01:00</lastmod>
     </url>
 </urlset>
