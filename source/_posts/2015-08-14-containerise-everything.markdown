@@ -8,7 +8,7 @@ categories: [web, development, tools, containers, docker]
 
 ## Why you should stop installing development environment locally
 
-This is a placeholder post for my talk about containers / Docker from [re:develop conference][1] 2015 conference in Bournemouth.
+This is a placeholder post for my talk about containers / Docker from [re:develop conference][1] 2015 conference in Bournemouth. I'll eventually write up the main points in a proper blog post form, but for now see the embedded slides.
 
 _____________________
 

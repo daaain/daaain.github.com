@@ -66,7 +66,7 @@ There's no ultimate recommendation as everyone's different, but you should give 
 
 ----
 
-This post was published originally on the ustwo blog: [http://ustwo.com/blog/you-should-design-your-working-life/](http://ustwo.com/blog/you-should-design-your-working-life/)
+This post was originally published on the ustwo blog: [http://ustwo.com/blog/you-should-design-your-working-life/](http://ustwo.com/blog/you-should-design-your-working-life/)
 
 [1]: https://en.wikipedia.org/wiki/Eight-hour_day
 [2]: https://medium.com/@kidbombay/how-to-be-happy-be8b2dc0677

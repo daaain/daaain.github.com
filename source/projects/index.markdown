@@ -2,49 +2,21 @@
 layout: page
 title: Projects
 ---
-## Web
+## Analogue
 
-### 2012 | JSSoundRecorder – Javascript sound collector and music maker
+### Pangolin Co-housing
 
-[Open website](http://daaain.github.com/JSSoundRecorder)
+[Open website](http://www.pangolincohousing.co.uk/)
 
-<img src="/images/projects/soundcollector.jpg" width="400"></img>
-
-The result of London Music Hack Day 2012. A foray into Web Audio, Web Workers and Binary Blob / File URL APIs, all coming together into a live sound recorder, a sound editor and a simple sequencer, enabling you to quickly record some sounds around you and play around making some simple loops with them.
-
-### 2012 | Balance Projector – experimental personal finance web app
-
-[Open website](http://daaain.github.com/projector/app/index.html#/projector)
-
-<img src="/images/projects/projector.jpg" width="400"></img>
-
-An experiment in using Google's awesome Angular.js framework. It's a learning project both in using Angular.js and saving user data locally.
-
-### 2010 | Granimator – iPad wallpaper app showcase
-
-[Open website](http://granimator.com/)
-
-<img src="/images/projects/granimator.jpg" width="400"></img>
-
-A wallpaper showcase website built for Granimator iPad app, where users can upload their creations. Built with Ruby on Rails and includes working on the backend API for uploading wallpaper images from the iPad app.
-
-### 2008 | Flaunt-it – interior decorating company portfolio
-
-[Open website](/projects/flaunt-it/)
-
-<img src="/images/projects/flaunt-it.jpg" width="400"></img>
-
-A company website for Flaunt-it with a dynamically generated grid of projects. Try reloading the page to see a different layout every time!
-
-### 2007 | David Fettes – nature photographer portfolio
-
-[Open website](http://www.davidfettes.com/)
-
-<img src="/images/projects/davidfettes.jpg" width="400"></img>
-
-A portfolio website for David Fettes, showcasing his breathtaking nature photos.
+A nascent co-housing group with the intention of building community housing in Hackney around the principles of sharing.
 
 ## Open source
+
+### Handlebars language syntax package for Sublime Text and Atom editors
+
+[Open Github repository](https://github.com/daaain/Handlebars)
+
+The most fully featured Handlebars.js language syntax library (to my knowledge) which is amongst others also used for syntax highlighting on [Github itself](https://github.com/github/linguist/blob/0624a9395cb20d142b3e8e333c1b623713d1136b/.gitmodules#L637).
 
 ### Guard-Jasmine2JUnit
 
@@ -73,3 +45,44 @@ Get Bookmarklet on the project page: [http://daaain.github.com/SmileBankStatemen
 Just log in to Smile and once you're on a statement page (works for both current and older ones) click on the bookmarklet.
 
 In a few seconds after getting the statement data and converting to CSV it shows a jQuery Fancybox with the text preselected, so you only have to press ctrl + c / cmd + c and paste the exported data into your favourite texteditor.
+
+## Web
+
+### 2012 | JSSoundRecorder – Javascript sound collector and music maker
+
+[Open website](http://daaain.github.com/JSSoundRecorder)
+
+<img src="/images/projects/soundcollector.jpg" width="400"></img>
+
+The result of London Music Hack Day 2012. A foray into Web Audio, Web Workers and Binary Blob / File URL APIs, all coming together into a live sound recorder, a sound editor and a simple sequencer, enabling you to quickly record some sounds around you and play around making some simple loops with them.
+
+### 2012 | Balance Projector – experimental personal finance web app
+
+[Open website](http://daaain.github.com/projector/app/index.html#/projector)
+
+<img src="/images/projects/projector.jpg" width="400"></img>
+
+An experiment in using Google's awesome Angular.js framework. It's a learning project both in using Angular.js and saving user data locally.
+
+### 2010 | Granimator – iPad wallpaper app showcase
+
+<img src="/images/projects/granimator.jpg" width="400"></img>
+
+A now offline wallpaper showcase website built for Granimator iPad app, where users can upload their creations. Built with Ruby on Rails and includes doing some of the work on the backend API for uploading wallpaper images from the iPad app.
+
+### 2008 | Flaunt-it – interior decorating company portfolio
+
+[Open website](/projects/flaunt-it/)
+
+<img src="/images/projects/flaunt-it.jpg" width="400"></img>
+
+A company website for Flaunt-it build in Flash, with a dynamically generated grid of projects. Try reloading the page to see a different layout every time!
+
+### 2007 | David Fettes – nature photographer portfolio
+
+[Open website](http://www.davidfettes.com/)
+
+<img src="/images/projects/davidfettes.jpg" width="400"></img>
+
+A portfolio website for David Fettes, showcasing his breathtaking nature photos. Built with Flash, giving a lot of love to transitions and small animations.
+
