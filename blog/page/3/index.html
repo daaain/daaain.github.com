@@ -70,6 +70,64 @@
 
 
     <article class="post h-entry">
+    <h1 class="title"><a href="/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem/">Loading Javascript / CSS files from Jammit&#8217;s assets.yml with Jasmine Gem to avoid duplication</a></h1>
+    <div class="entry e-content">
+        <p>Got a really handy bit of script working today, but it took me some time to figure out so thought I should post it.</p>
+
+<p>Using the latest Jasmine Gem (only on Github master as of 2013/01/29) you just need to create <code>spec/javascripts/support/jasmine_helper.rb</code> and drop this in there (note that <code>jasmine_helper.rb</code> takes the responsibility of custom configs over from <code>jasmine_config.rb</code> from now on!):</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>require 'yaml'
+</span><span class='line'>require 'erb'
+</span><span class='line'>
+</span><span class='line'>Jasmine.configure do |config|
+</span><span class='line'>  jammitYaml = YAML.load(ERB.new(File.read('config/assets.yml')).result)
+</span><span class='line'>  config.src_files = lambda { Jasmine::PathExpander.expand(config.src_dir, jammitYaml['javascripts']['workspace']) }
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What it does is to load <code>assets.yml</code>, parse the YAML array <code>javascripts: workspace:</code>, uses Jasmine&#8217;s <code>PathExpander.expand</code> method to actually glob the files from the paths listed there and finally wraps the whole thing into a lambda so that it acts as a method.</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-29T18:33:00+00:00" class="dt-published" pubdate data-updated="true">2013 Jan 29</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/ruby/'>ruby</a>, <a class='category p-category' href='/blog/categories/tools/'>tools</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+        <span class="comments"><a href="/blog/2013/01/29/loading-javascript-source-files-from-jammits-assets-dot-yml-with-jasmine-gem/#disqus_thread">Comments</a></span>
+        
+    </div>
+</article>
+
+
+    <article class="post h-entry">
     <h1 class="title"><a href="/blog/2013/01/18/getting-cross-origin-resource-sharing-with-complex-jquery-ajax-requests/">Getting Cross-origin resource sharing with complex jQuery AJAX requests</a></h1>
     <div class="entry e-content">
         <p>I&#8217;m working on an HTML5 desktop application which needs to load some HTML text from a server, but not through an existing API. So I had to find a solution which can be set up without too much backend work and make it possible for non-technical people to easily update the content. I&#8217;m assuming that the easiest setup will be using an existing CMS system with a few custom server settings to enable cross-domain communication. It&#8217;s also a security sensitive application, so the content will need to be protected with basic authorisation at least.</p>
@@ -296,75 +354,6 @@
 </div>
         
         <span class="comments"><a href="/blog/2012/09/03/some-thoughts-on-the-fragile-relationship-between-nature-conservation-and-economic-growth/#disqus_thread">Comments</a></span>
-        
-    </div>
-</article>
-
-
-    <article class="post h-entry">
-    <h1 class="title"><a href="/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/">Setting up rmate with Sublime Text for remote file editing over SSH</a></h1>
-    <div class="entry e-content">
-        <p>If you want to be able to edit files using your local Sublime Text 2 / 3 app over SSH, you can use <code>rmate</code> which is a small remote connection script developed originally for TextMate.</p>
-
-<p>This is how it goes:</p>
-
-<ul>
-<li>Install the <a href="https://github.com/henrikpersson/rsub">rsub</a> plugin for ST, which is available through <a href="http://wbond.net/sublime_packages/package_control">Package Control</a> too.</li>
-<li>Add a remote forwarding line under the right host in your <code>~/.ssh/config</code> file to enable connection:</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>Host myfancyvps
-</span><span class='line'>  Hostname 123.45.67.89
-</span><span class='line'>  RemoteForward 52698 127.0.0.1:52698</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>SSH in to your remote: <code>ssh myfancyvps</code></li>
-<li>Download rmate: <code>curl https://raw.githubusercontent.com/aurora/rmate/master/rmate &gt; rmate</code></li>
-<li>Move it in place: <code>sudo mv rmate /usr/local/bin</code> – you can put in <code>~/bin</code> too if you only want to set it up for yourself, but sharing is caring :)</li>
-<li>Make it executable: <code>sudo chmod +x /usr/local/bin/rmate</code></li>
-<li>Profit: <code>rmate .profile</code> – make sure you have an open ST2 window to enable listening!</li>
-</ul>
-
-
-<p>The main reason why I really like this is because you can also <code>sudo rmate</code> with system config files and be able to actually save them back, as opposed to editing via an SFTP client where you need to log in with <code>root</code> to be able to do this.</p>
-
-<p>Also, don&#8217;t forget to open the port in your <code>iptables</code> if you have a restrictive / whitelist firewall policy: <code>-A INPUT -p tcp --dport 52698 -j ACCEPT</code>. Also you have to do <code>iptables-save</code> and <code>iptables-restore</code> to <a href="http://askubuntu.com/questions/66890/how-can-i-make-a-specific-set-of-iptables-rules-permanent">make these settings persistent after reboot</a>.</p>
-
-<p>A slightly annoying caveat is that a port can&#8217;t be shared with other people if you happen to be logged in at the same time, so you might have to set up separate ports in <code>iptables</code> with the first port number in the <code>RemoteForward</code> setting matching it (the local port should remain the same). In this case you have to specify the port number in each call though: <code>rmate -p 52699</code>. So probably the best is to create an alias in your <code>.profile</code>: <code>alias rsub='rmate -p 52699'</code>, but in this case you also need to add: <code>alias sudo='sudo '</code>. By adding that trailing space you make sure that the <code>sudo</code>&#8216;d command is also checked for alias substitution, so doing <code>sudo rsub my_system_config_file</code> will still work.</p>
-
-        
-        
-    </div>
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-02T02:20:00+01:00" class="dt-published" pubdate data-updated="true">2012 Sep 02</time></div>
-        <div class="tags">
-
-<div class="cat">
-  
-    <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/ssh/'>ssh</a>, <a class='category p-category' href='/blog/categories/sublimetext/'>sublimetext</a>, <a class='category p-category' href='/blog/categories/tools/'>tools</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
-  
-</div>
-
-</div>
-        
-        <span class="comments"><a href="/blog/2012/09/02/setting-up-rmate-with-sublime-text-for-remote-file-editing-over-ssh/#disqus_thread">Comments</a></span>
         
     </div>
 </article>
