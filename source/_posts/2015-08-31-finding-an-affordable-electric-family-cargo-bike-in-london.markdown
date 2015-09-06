@@ -10,7 +10,7 @@ categories: [sustainability, cycling, lifestyle]
 
 My second little one was one month old just the other day, so we started to talk about some ideas with my wife Ivana how will she be able to stay mobile when I go back to work. She has a hybrid bike now which was converted to electric to help her get around during this last pregnancy, but with the added weight of the motor and battery she won't be able to also have two children plus all the stuff in the basket on the bike.
 
-The "normal" reaction at this point for most people would be to go and buy a family car, but unless you live in a remote countryside location it only makes sense to drive if you're disabled or if you're a conservative politician.
+> The "normal" reaction at this point for most people would be to go and buy a family car, but unless you live in a remote countryside location it only makes sense to drive if you're disabled or if you're a conservative politician.
 
 Not for us though, especially after having lived for a while in Amsterdam, where people just get a cargo bike (bakfiets) instead. There are tons of brands to choose from (Bakfiets, Christiania Bikes, De Fietsfabriek, Nihola, Winther, Urban Arrow, WorkCycles, Dolly Bike, Cangoo, Yuba, etc etc and these are just the ones with family friendly models) if you live in an advanced cycling country like The Netherlands or Denmark, but here in the United Kingdom the options are a bit more limited and prices much more inflated – usually the same in pounds as they are in euros.
 
@@ -20,9 +20,11 @@ The bikes come in many different sizes and shapes, but since Ivana's main concer
 
 With these in mind I set out to do some research which took a good few hours so I thought I should share it in case anyone else finds themselves in the same situation.
 
-Unfortunately a lot of these family cargo bikes cost thousands of pounds even without the electric motor, so our shortlist of the "best" is what you can get between £2000-£3000 once you include all the essentials like rain cover tent and so. There are some cheaper Chinese models, but since we don't have a garage to protect the trike from the elements (or want to spend loads on maintenance) these wouldn't be the best invesment on the long term.
+> Unfortunately a lot of these family cargo bikes cost thousands of pounds even without the electric motor, so our shortlist of the "best" is what you can get between £2000-£3000 once you include all the essentials like rain cover tent and so.
 
-So without further ado, the top 4 (the titles link to the official web sites). I won't list detailed specs, but instead write up my impression and what I found out through some research and forum dig.
+There are some cheaper Chinese models, but since we don't have a garage to protect the trike from the elements (or want to spend loads on maintenance) these wouldn't be the best invesment on the long term.
+
+So without further ado, here are the top 4 (the titles link to the official web sites). I won't list detailed specs, but instead write up my impression and what I found out through some research and forum dig.
 
 ## The best ones in no particular order
 
@@ -30,7 +32,7 @@ So without further ado, the top 4 (the titles link to the official web sites). I
 
 [![Credits: © Babboe][14]][15]
 
-With a starting price of £1899 this is the cheapest of the lot. According to [Practical Cycles][2] they are made in Taiwan and some of the earlier models were getting some [bad reputation][3] a few years ago, but it seems that the constructions has improved a lot and Babboe now offers an impressive 5 years warranty on the frame of the bikes. I also had the chance to see and ride a 4 years old model which was in fairly good shape given the age and the fact that it's used daily to haul heavy tools.
+With a starting price of £1899 this is the cheapest of the lot. Babboe frames are designed in The Netherlands and made in China, the electric parts come from Taiwan, the wood is European, the Shimano gears are Japanese, the Magura brakes are German and finally the cargo bikes are assembled in The Netherlands. Some of the earlier models were getting some [bad reputation][3] a few years ago, but it seems that the constructions has improved a lot and Babboe now offers an impressive 5 years warranty on the frame of the bikes. I also had the chance to see and ride a 4 years old model which was in fairly good shape given the age and the fact that it was used daily to haul heavy tools.
 
 Quality concerns set aside, actually riding the bike didn't feel that great. It was a bit difficult to keep it on course in (the admittedly quite bumpy) Bethnal Green Gardens park.
 
@@ -80,9 +82,9 @@ We were really lucky to have found an [open day][10] nearby in Bethnal Green. Th
 
 made me get the bike through them right then and there.
 
-But anyway, it's very difficult to decide purely from specs and reviews whether for example you prefer indirect or direct steering (Babboes are former, Shuttle and Christiania the latter) so make absolutely sure that you try at least a couple of different brands and models.
+But anyway, it's very difficult to decide purely from specs and reviews whether for example you prefer indirect or direct steering (Babboes are former, Shuttle and Christiania the latter), so make absolutely sure that you try at least a couple of different brands and models.
 
-As well as BikeWorks another good place to go and check bikes out at is [London Green Cycles][12] which is a shop next to Regent's Park with a big selection. Slightly annoyingly though they don't have prices for any of the electric models on their website, if you're the owner reading this please do put them up there.
+As well as BikeWorks, another good place to go and check bikes out at is [London Green Cycles][12], which is a shop next to Regent's Park with a big selection. Slightly annoyingly though they don't have prices for any of the electric models on their website, if you're the owner reading this please do put them up there.
 
 If you want to do some further research yourself, the German website [Nutzrad][13] has a massive catalogue of different bikes which is a good starting point.
 
