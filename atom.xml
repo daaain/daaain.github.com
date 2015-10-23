@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2015-09-06T12:04:54+01:00</updated>
+  <updated>2015-10-23T22:22:57+01:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -267,7 +267,13 @@
     <link href="http://danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/"/>
     <updated>2013-03-22T10:42:00+00:00</updated>
     <id>http://danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise</id>
-    <content type="html"><![CDATA[<p>I gave an introductory talk a while back at the <a href="http://www.meetup.com/londonajax/events/100830572/">London Ajax User Group</a> about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.</p>
+    <content type="html"><![CDATA[<p>Update 2 (2015/10/23) I realised I should really put an update on this post, at this point you should really not use Deferred and instead of jQuery or any other 3rd party library just start relying on the native ES6 / ES2015 Promise – unless you need some advanced functionality, in which case try something like <a href="https://github.com/petkaantonov/bluebird">Bluebird</a>.</p>
+
+<p>For a more up to date introduction to Promises, check out <a href="http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html">this post on the PouchDB blog</a>.</p>
+
+<hr />
+
+<p>I gave an introductory talk a while back at the <a href="http://www.meetup.com/londonajax/events/100830572/">London Ajax User Group</a> about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.</p>
 
 <p>Update (2012/09/01): As it turns out there was a nice video recorded of the talk, if you have 10 minutes free give it a watch!</p>
 
