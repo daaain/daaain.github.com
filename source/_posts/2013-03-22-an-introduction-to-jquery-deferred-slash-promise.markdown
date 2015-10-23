@@ -4,8 +4,14 @@ title: "An introduction to jQuery Deferred / Promise and the design pattern in g
 description: "A comprehensive tutorial to the Deferred / Promise pattern in JavaScript using jQuery. Lot of code examples and video of the talk I gave (with slides)"
 date: 2013-03-22 10:42
 comments: true
-external-url: 
+external-url:
 categories: [web, development, jquery, javascript, patterns]
+---
+
+Update 2 (2015/10/23) I realised I should really put an update on this post, at this point you should really not use Deferred and instead of jQuery or any other 3rd party library just start relying on the native ES6 / ES2015 Promise – unless you need some advanced functionality, in which case try something like [Bluebird](https://github.com/petkaantonov/bluebird).
+
+For a more up to date introduction to Promises, check out: http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+
 ---
 
 I gave an introductory talk a while back at the [London Ajax User Group](http://www.meetup.com/londonajax/events/100830572/) about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.
@@ -42,9 +48,9 @@ $.ajax({
         var insertDiv2 = $('<div></div>');
         insertDiv2.html($(response).find('section').html());
         $('body').append(insertDiv1, '<hr/>', insertDiv2);
-              } 
+              }
     });
-  } 
+  }
 });
 ```
 
@@ -123,11 +129,11 @@ Return a Promise from a method and attach a listener to it (can have more than o
 ``` javascript
 function getPromise() {
   var deferred = $.Deferred();
-  
+
   setTimeout(function(){
     deferred.resolve("hurray");
   }, 1000);
-  
+
   return deferred.promise();
 }
 
@@ -212,7 +218,7 @@ getTweetsFor("domenic") // promise-returning function
   );
 ```
 
-I've taken this example from [Domenic Denicola's blog post "You're Missing the Point of Promises"](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/) which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now! 
+I've taken this example from [Domenic Denicola's blog post "You're Missing the Point of Promises"](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/) which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now!
 
 ## A few more pointers
 
