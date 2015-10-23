@@ -10,7 +10,7 @@ categories: [web, development, jquery, javascript, patterns]
 
 Update 2 (2015/10/23) I realised I should really put an update on this post, at this point you should really not use Deferred and instead of jQuery or any other 3rd party library just start relying on the native ES6 / ES2015 Promise – unless you need some advanced functionality, in which case try something like [Bluebird](https://github.com/petkaantonov/bluebird).
 
-For a more up to date introduction to Promises, check out: http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+For a more up to date introduction to Promises, check out [this post on the PouchDB blog](http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html).
 
 ---
 
