@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2015-10-23T22:22:57+01:00</updated>
+  <updated>2015-10-29T11:11:51+00:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -155,14 +155,25 @@
     <id>http://danieldemmel.me/blog/2015/08/14/containerise-everything</id>
     <content type="html"><![CDATA[<h2>Why you should stop installing development environment locally</h2>
 
-<p>This is a placeholder post for my talk about containers / Docker from <a href="http://redevelop.io">re:develop conference</a> 2015 conference in Bournemouth. I&#8217;ll eventually write up the main points in a proper blog post form, but for now see the embedded slides.</p>
+<p>This is a placeholder post for my talk about containers / Docker from <a href="http://redevelop.io">re:develop conference</a> 2015 conference in Bournemouth. I&#8217;ll eventually write up the main points in a proper blog post form, but for now have a look at the embedded slides and video recording.</p>
 
 <hr />
+
+<h3>Video</h3>
+
+<div class="video-container">
+  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</div>
+
+
+<h3>Slides</h3>
 
 <script async class="speakerdeck-embed" data-id="8e12ea8c3f29422380c11514497bfefd" data-ratio="1.77777777777778" src="http://danieldemmel.me//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>Make sure to also have a look at the <a href="https://github.com/ustwo/docker-node-boilerplate">companion repository on Github</a>, which shows how to set up a Node based development environment with Docker.</p>
+<h3>Code</h3>
+
+<p>Make sure to also have a look at the <a href="https://github.com/ustwo/docker-node-boilerplate">companion repository on Github</a>, which shows how to set up a Node based development environment with Docker. Of course it would work with anything else which runs on Linux, but this simple working example should give you a good starting point.</p>
 ]]></content>
   </entry>
   
