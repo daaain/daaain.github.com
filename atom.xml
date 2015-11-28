@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2015-11-28T13:16:09+00:00</updated>
+  <updated>2015-11-28T13:42:53+00:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -73,6 +73,8 @@
 <p>It’s difficult to foresee what kind of possibilities these would bring, but I think they could have to potential to bring open, global collaboration to a lot of new fields like design, engineering, music, etc.</p>
 
 <p>Also it feels the time is getting right for this, with technologies like containers which enable using (often compiled) tools for processing these binary files with much less hassle when it comes to setting environments up with all dependencies installed. If you thought Docker is only for deploying web services, <a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/">think again</a>.</p>
+
+<p>And maybe, just maybe, this could pave the way for programming to move beyond text? I can see <a href="http://worrydream.com/#!/dbx">Bret Victor nodding in the background</a>&#8230;</p>
 ]]></content>
   </entry>
   
