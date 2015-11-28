@@ -70,6 +70,98 @@
 
 
     <article class="post h-entry">
+    <h1 class="title"><a href="/blog/2015/11/28/why_and_how_github_should_have_binary_diffs/">Why and how Github should have binary diffs</a></h1>
+    <div class="entry e-content">
+        <p>While git and Github brought tremendous improvement to how people can manage changes and collaborate on their software and simple textual content, most people still work with various binary formats and could benefit greatly from a similar boost in the way they work.</p>
+
+<p>This effort would not only make Github much more useful by making binary file comparison possible, but also contribute hugely to efforts like the semantic web by compiling a library of the best open source parsers (similar to <a href="https://github.com/github/linguist">Linguist</a> for code) which can be used by anyone to analyse binary files.</p>
+
+<p>Of course crunching through massive files would be very costly, but depending on complexity and usefulness each format could be processed to a various degree.</p>
+
+<h2>1. Gather metadata</h2>
+
+<p>As a first step only metadata would be extracted from the file. This would give a high level idea of what changed, making it possible for people to do quick sanity checks whether the changes look right.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>Audio files (MP3, WAV, FLAC, etc): length, artist, title, album art, etc</li>
+<li>Videos (MP4, WebM, MKV, etc): length, resolution, encoding, etc</li>
+<li>Documents (DOC, DOCX, PDF, etc): number of pages, author, etc</li>
+<li>Archives (ZIP, TAR, RAR, etc): file and folder structure, etc</li>
+</ul>
+
+
+<h2>2. Sample binary data</h2>
+
+<p>As a next step a small sample of the binary data could be taken, giving a glimpse into the contents of the file.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>Audio files: waveform of the first few seconds</li>
+<li>Videos: a few frames</li>
+<li>Documents: a couple of pages </li>
+</ul>
+
+
+<h2>3. Fully analyse binary data</h2>
+
+<p>As the final step the full binary data would be analysed to enable deep understanding and comparison of content, with some error and inconsistency checks thrown in just for good measure.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>Audio files: playable waveform diffs highlighting changes</li>
+<li>Videos: comparison graph and clips of changed sections</li>
+<li>Documents: textual and visual diffs of changes in various pages</li>
+</ul>
+
+
+<hr />
+
+<p>Since Github is <a href="https://github.com/blog/1986-announcing-git-large-file-storage-lfs">already working on large file support</a>, this could be a very interesting complementary service, rolled out similarly to a small number of users and file formats first.</p>
+
+<p>This might also mean improving the diff UI to accommodate for these richer comparisons which could also benefit code, but I’ll leave that for another post. Suffice to say that pull requests should be much more suited to (near) real-time collaboration, and not just on code. And that using semantic understanding to go beyond a simple text diff should be used for visualisation (and the tools are actually already available for code via the syntax definitions in Linguist used only for code colouring).</p>
+
+<p>It’s difficult to foresee what kind of possibilities these would bring, but I think they could have to potential to bring open, global collaboration to a lot of new fields like design, engineering, music, etc.</p>
+
+<p>Also it feels the time is getting right for this, with technologies like containers which enable using (often compiled) tools for processing these binary files with much less hassle when it comes to setting environments up with all dependencies installed. If you thought Docker is only for deploying web services, <a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/">think again</a>.</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-28T13:08:00+00:00" class="dt-published" pubdate data-updated="true">2015 Nov 28</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category p-category' href='/blog/categories/open/'>open</a>, <a class='category p-category' href='/blog/categories/semantic/'>semantic</a>, <a class='category p-category' href='/blog/categories/tools/'>tools</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+        <span class="comments"><a href="/blog/2015/11/28/why_and_how_github_should_have_binary_diffs/#disqus_thread">Comments</a></span>
+        
+    </div>
+</article>
+
+
+    <article class="post h-entry">
     <h1 class="title"><a href="/blog/2015/08/31/finding-an-affordable-electric-family-cargo-bike-in-london/">Finding an affordable electric family cargo bike in London</a></h1>
     <div class="entry e-content">
         <h2>The problem of staying mobile with two (or more) children</h2>
@@ -257,64 +349,6 @@
 </div>
         
         <span class="comments"><a href="/blog/2015/08/16/indiewebify-yourself/#disqus_thread">Comments</a></span>
-        
-    </div>
-</article>
-
-
-    <article class="post h-entry">
-    <h1 class="title"><a href="/blog/2015/08/14/containerise-everything/">Containerise everything</a></h1>
-    <div class="entry e-content">
-        <h2>Why you should stop installing development environment locally</h2>
-
-<p>This is a placeholder post for my talk about containers / Docker from <a href="http://redevelop.io">re:develop conference</a> 2015 conference in Bournemouth. I&#8217;ll eventually write up the main points in a proper blog post form, but for now have a look at the embedded slides and video recording.</p>
-
-<hr />
-
-<h3>Video</h3>
-
-<div class="video-container">
-  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-</div>
-
-
-<h3>Slides</h3>
-
-<script async class="speakerdeck-embed" data-id="8e12ea8c3f29422380c11514497bfefd" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
-
-
-<h3>Code</h3>
-
-<p>Make sure to also have a look at the <a href="https://github.com/ustwo/docker-node-boilerplate">companion repository on Github</a>, which shows how to set up a Node based development environment with Docker. Of course it would work with anything else which runs on Linux, but this simple working example should give you a good starting point.</p>
-
-        
-        
-    </div>
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-08-14T09:11:00+01:00" class="dt-published" pubdate data-updated="true">2015 Aug 14</time></div>
-        <div class="tags">
-
-<div class="cat">
-  
-    <a class='category p-category' href='/blog/categories/containers/'>containers</a>, <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/docker/'>docker</a>, <a class='category p-category' href='/blog/categories/tools/'>tools</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
-  
-</div>
-
-</div>
-        
-        <span class="comments"><a href="/blog/2015/08/14/containerise-everything/#disqus_thread">Comments</a></span>
         
     </div>
 </article>

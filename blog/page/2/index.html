@@ -70,6 +70,64 @@
 
 
     <article class="post h-entry">
+    <h1 class="title"><a href="/blog/2015/08/14/containerise-everything/">Containerise everything</a></h1>
+    <div class="entry e-content">
+        <h2>Why you should stop installing development environment locally</h2>
+
+<p>This is a placeholder post for my talk about containers / Docker from <a href="http://redevelop.io">re:develop conference</a> 2015 conference in Bournemouth. I&#8217;ll eventually write up the main points in a proper blog post form, but for now have a look at the embedded slides and video recording.</p>
+
+<hr />
+
+<h3>Video</h3>
+
+<div class="video-container">
+  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</div>
+
+
+<h3>Slides</h3>
+
+<script async class="speakerdeck-embed" data-id="8e12ea8c3f29422380c11514497bfefd" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<h3>Code</h3>
+
+<p>Make sure to also have a look at the <a href="https://github.com/ustwo/docker-node-boilerplate">companion repository on Github</a>, which shows how to set up a Node based development environment with Docker. Of course it would work with anything else which runs on Linux, but this simple working example should give you a good starting point.</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-14T09:11:00+01:00" class="dt-published" pubdate data-updated="true">2015 Aug 14</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category p-category' href='/blog/categories/containers/'>containers</a>, <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/docker/'>docker</a>, <a class='category p-category' href='/blog/categories/tools/'>tools</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+        <span class="comments"><a href="/blog/2015/08/14/containerise-everything/#disqus_thread">Comments</a></span>
+        
+    </div>
+</article>
+
+
+    <article class="post h-entry">
     <h1 class="title"><a href="/blog/2014/04/13/why-you-not-henry-ford-should-design-your-working-life/">Why YOU — not Henry Ford — should design your working life</a></h1>
     <div class="entry e-content">
         <h2>Your life was designed 150 years ago</h2>
@@ -218,401 +276,6 @@
 </div>
         
         <span class="comments"><a href="/blog/2014/01/19/build-your-minimum-viable-product/#disqus_thread">Comments</a></span>
-        
-    </div>
-</article>
-
-
-    <article class="post h-entry">
-    <h1 class="title"><a href="/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/">An introduction to jQuery Deferred / Promise and the design pattern in general</a></h1>
-    <div class="entry e-content">
-        <p>Update 2 (2015/10/23) I realised I should really put an update on this post, at this point you should really not use Deferred and instead of jQuery or any other 3rd party library just start relying on the native ES6 / ES2015 Promise – unless you need some advanced functionality, in which case try something like <a href="https://github.com/petkaantonov/bluebird">Bluebird</a>.</p>
-
-<p>For a more up to date introduction to Promises, check out <a href="http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html">this post on the PouchDB blog</a>.</p>
-
-<hr />
-
-<p>I gave an introductory talk a while back at the <a href="http://www.meetup.com/londonajax/events/100830572/">London Ajax User Group</a> about jQuery Promises after which there was a lively debate, so I thought it would be great to post the content of the slides with some notes as a sort of tutorial.</p>
-
-<p>Update (2012/09/01): As it turns out there was a nice video recorded of the talk, if you have 10 minutes free give it a watch!</p>
-
-<div class="video-container">
-  <iframe src="//player.vimeo.com/video/73539595?color=c9ff23" width="400" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/73539595">Introduction to jQuery Promises / Deferreds - London Ajax User Group 12.02.2013.</a> from <a href="http://vimeo.com/daaain">Daniel Demmel</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-</div>
-
-
-<p>The original presentation is on Github (made with <a href="https://github.com/infews/keydown">Keydown</a> as presentation engine which doesn&#8217;t seem to handle resizing well enough to be embeddable): <a href="http://daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html">daaain.github.com/jquery-deferred-intro/jquery-deferred-intro/slides.html</a></p>
-
-<h2>A simple CORS AJAX example</h2>
-
-<p>As a simple scenario to optimise I set up a not very useful example of loading 2 articles from HTML5Rocks and showing the first sections of each.</p>
-
-<iframe width="100%" height="300" src="http://jsfiddle.net/dain/87uPV/3/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-<h2>So in which cases are Promises useful?</h2>
-
-<h3>AJAX request handler spaghetti</h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-</span><span class='line'>  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/file/xhr2/&#39;</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">insertDiv1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">insertDiv1</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">response</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-</span><span class='line'>      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/audio/scheduling/&#39;</span><span class="p">,</span>
-</span><span class='line'>      <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">insertDiv2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">insertDiv2</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">response</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">insertDiv1</span><span class="p">,</span> <span class="s1">&#39;&lt;hr/&gt;&#39;</span><span class="p">,</span> <span class="nx">insertDiv2</span><span class="p">);</span>
-</span><span class='line'>              <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Timing issues (DOM ready, animations, etc)</h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/file/xhr2/&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">insertDiv1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>      <span class="nx">insertDiv1</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">response</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/audio/scheduling/&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="kd">var</span> <span class="nx">insertDiv2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>          <span class="nx">insertDiv2</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">response</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">insertDiv1</span><span class="p">,</span> <span class="s1">&#39;&lt;hr/&gt;&#39;</span><span class="p">,</span> <span class="nx">insertDiv2</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="p">});</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>But what are these Deferreds and Promises really?</h2>
-
-<h3>Deferred</h3>
-
-<ul>
-<li>A proxy for an asynchronous, future event</li>
-<li>Has an interface for getting <code>resolve()</code>d or <code>reject()</code>ed</li>
-<li>Starts in <code>pending</code> state, can only be finished once</li>
-<li>Calls listeners immediately (but always async) once resolved</li>
-</ul>
-
-
-<h3>Promise</h3>
-
-<ul>
-<li>Allows listening and state inspection (using <code>state()</code>), but completely immutable so no interface for resolution</li>
-<li>Basic (jQuery specific) listeners are <code>done()</code> and <code>fail()</code></li>
-<li>Can be chained with <code>then()</code> (used to be <code>pipe()</code>)</li>
-<li>Can be grouped and processed using <code>$.when()</code></li>
-</ul>
-
-
-<h2>How do they work?</h2>
-
-<h3>A canonical Deferred example</h3>
-
-<p>Setting up a listener and triggering it with resolve:</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">deferred</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">deferred</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="nx">alert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">deferred</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This also works as it doesn&#8217;t matter if a Deferred is already resolved it will still trigger the callback we attach to it:</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">deferred</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">deferred</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">deferred</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="nx">alert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>A canonical Promise + When example</h3>
-
-<p>Return a Promise from a method and attach a listener to it (can have more than one):</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">getPromise</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">deferred</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="nx">deferred</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s2">&quot;hurray&quot;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">deferred</span><span class="p">.</span><span class="nx">promise</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span> <span class="nx">getPromise</span><span class="p">()</span> <span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="nx">alert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>So let&#8217;s untangle our example</h3>
-
-<p>Create a Promise for DOM ready and the two AJAX requests and wait for all of them to be fulfilled:</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">getReady</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">deferredReady</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">();</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deferredReady</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">deferredReady</span><span class="p">.</span><span class="nx">promise</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">firstRequest</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/file/xhr2/&#39;</span> <span class="p">}),</span>
-</span><span class='line'>    <span class="nx">secondRequest</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/audio/scheduling/&#39;</span> <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span> <span class="nx">getReady</span><span class="p">(),</span> <span class="nx">firstRequest</span><span class="p">,</span> <span class="nx">secondRequest</span>
-</span><span class='line'><span class="p">).</span><span class="nx">done</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">readyResponse</span><span class="p">,</span> <span class="nx">firstResponse</span><span class="p">,</span> <span class="nx">secondResponse</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">insertDiv1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">insertDiv1</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">firstResponse</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">insertDiv2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">insertDiv2</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">secondResponse</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">insertDiv1</span><span class="p">,</span> <span class="s1">&#39;&lt;hr/&gt;&#39;</span><span class="p">,</span> <span class="nx">insertDiv2</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Another solution</h3>
-
-<p>The AJAX request can be already fired off while we wait for the DOM (also showing how can we chain listeners with <code>then()</code>):</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">getReady</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">deferredReady</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">();</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">deferredReady</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">deferredReady</span><span class="p">.</span><span class="nx">promise</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">var</span> <span class="nx">firstRequest</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/file/xhr2/&#39;</span> <span class="p">}),</span>
-</span><span class='line'>    <span class="nx">secondRequest</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://www.html5rocks.com/en/tutorials/audio/scheduling/&#39;</span> <span class="p">}),</span>
-</span><span class='line'>    <span class="nx">firstDiv</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">secondDiv</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span> <span class="nx">firstRequest</span><span class="p">,</span> <span class="nx">secondRequest</span>
-</span><span class='line'><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">firstResponse</span><span class="p">,</span> <span class="nx">secondResponse</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">firstDiv</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">firstResponse</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>  <span class="nx">secondDiv</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&lt;/div&gt;&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">secondResponse</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">getReady</span><span class="p">();</span>
-</span><span class='line'><span class="p">}).</span><span class="nx">done</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">readyResponse</span><span class="p">,</span> <span class="nx">firstResponse</span><span class="p">,</span> <span class="nx">secondResponse</span> <span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">firstDiv</span><span class="p">,</span> <span class="s1">&#39;&lt;hr/&gt;&#39;</span><span class="p">,</span> <span class="nx">secondDiv</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Dealing with rejection</h2>
-
-<p>When a Promise gets <code>reject()</code>ed it will immediately cascade down the <code>then()</code> chain so you only need to handle it at the end (with jQuery it&#8217;s only since 1.8+ though).</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>getTweetsFor("domenic") // promise-returning function
-</span><span class='line'>  .then(function (tweets) {
-</span><span class='line'>    var shortUrls = parseTweetsForUrls(tweets);
-</span><span class='line'>    var mostRecentShortUrl = shortUrls[0];
-</span><span class='line'>    return expandUrlUsingTwitterApi(mostRecentShortUrl); // promise-returning function
-</span><span class='line'>  })
-</span><span class='line'>  .then(httpGet) // promise-returning function
-</span><span class='line'>  .then(
-</span><span class='line'>    function (responseBody) {
-</span><span class='line'>      console.log("Most recent link text:", responseBody);
-</span><span class='line'>    },
-</span><span class='line'>    function (error) {
-</span><span class='line'>      console.error("Error with the twitterverse:", error);
-</span><span class='line'>    }
-</span><span class='line'>  );</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&#8217;ve taken this example from <a href="http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/">Domenic Denicola&#8217;s blog post &#8220;You&#8217;re Missing the Point of Promises&#8221;</a> which is a great next step on the path of understanding Promises and asynchronous control flows. Go and read it now!</p>
-
-<h2>A few more pointers</h2>
-
-<ul>
-<li>In case there&#8217;s a long request you can send updates to a <code>progress()</code> listener using <code>notify()</code></li>
-<li>You can insert transformations into the <code>then()</code> chain</li>
-</ul>
-
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span> <span class="p">{</span> <span class="nx">testing</span><span class="o">:</span> <span class="mi">123</span> <span class="p">}</span> <span class="p">).</span><span class="nx">done</span><span class="p">(</span>
-</span><span class='line'>  <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">testing</span><span class="p">);</span> <span class="p">}</span> <span class="cm">/* alerts &quot;123&quot; */</span>
-</span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>And finally it must be said that jQuery Deferred is by far not the only one, see <a href="http://wiki.commonjs.org/wiki/Promises/A">Promises/A spec</a> and the clarified <a href="http://promises-aplus.github.com/promises-spec/">Promises/A+ spec</a>. If you&#8217;re not already using jQuery then <a href="https://github.com/kriskowal/q">Q</a>, <a href="https://github.com/tildeio/rsvp.js">rsvp.js</a> or <a href="https://github.com/cujojs/when">when</a> might be better alternatives with seamless interoperability due to stricter adherence to the CommonJS specs.</li>
-</ul>
-
-
-        
-        
-    </div>
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-22T10:42:00+00:00" class="dt-published" pubdate data-updated="true">2013 Mar 22</time></div>
-        <div class="tags">
-
-<div class="cat">
-  
-    <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/javascript/'>javascript</a>, <a class='category p-category' href='/blog/categories/jquery/'>jquery</a>, <a class='category p-category' href='/blog/categories/patterns/'>patterns</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
-  
-</div>
-
-</div>
-        
-        <span class="comments"><a href="/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/#disqus_thread">Comments</a></span>
         
     </div>
 </article>
