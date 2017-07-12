@@ -70,6 +70,162 @@
 
 
     <article class="post h-entry">
+    <h1 class="title"><a href="/blog/2013/01/18/getting-cross-origin-resource-sharing-with-complex-jquery-ajax-requests/">Getting Cross-origin resource sharing with complex jQuery AJAX requests</a></h1>
+    <div class="entry e-content">
+        <p>I&#8217;m working on an HTML5 desktop application which needs to load some HTML text from a server, but not through an existing API. So I had to find a solution which can be set up without too much backend work and make it possible for non-technical people to easily update the content. I&#8217;m assuming that the easiest setup will be using an existing CMS system with a few custom server settings to enable cross-domain communication. It&#8217;s also a security sensitive application, so the content will need to be protected with basic authorisation at least.</p>
+
+<p>Well, let me get things straight: CORS which is more than the simplest GET request is not easy!</p>
+
+<p>While trying to set up and end to end proof of concept to make sure this will work and to be able to advise with setup I ran into several blockers, so I&#8217;m going to go through them step by step.</p>
+
+<h2>Setting up the jQuery AJAX request</h2>
+
+<p>For simple use cases all you need to do to is fire off a simple GET request:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$.ajax({
+</span><span class='line'>  type: 'GET',
+</span><span class='line'>  url: 'http://www.html5rocks.com/en/tutorials/file/xhr2/',
+</span><span class='line'>  success: function(response) {
+</span><span class='line'>      var article = $(response).find('article').html();
+</span><span class='line'>      $('body').html(article);
+</span><span class='line'>  }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the server you&#8217;re hitting is sending back the header <code>Access-Control-Allow-Origin</code> with the value <code>*</code> you&#8217;re all set:</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/atobin/1/embed?live,javascript">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>However what I ended up with is far more complicated, as doing anything with custom headers (which included authorisation) you have to first make a so called <a href="http://www.html5rocks.com/en/tutorials/cors/#toc-handling-a-not-so-simple-request">preflight</a> request. This is an OPTIONS request which only asks the server if it supports all the headers needed for the &#8216;real&#8217; request which follows.</p>
+
+<p>So let&#8217;s first see the full AJAX request:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$.ajax({
+</span><span class='line'>  type: 'GET',
+</span><span class='line'>  url: 'http://www.mydomain.com/myFancyContent.php',
+</span><span class='line'>  headers: {
+</span><span class='line'>      'MyCustomHeader': 'important information'
+</span><span class='line'>  },
+</span><span class='line'>  xhrFields: {
+</span><span class='line'>      withCredentials: true
+</span><span class='line'>  },
+</span><span class='line'>  username: 'myuser',
+</span><span class='line'>  password: 'mypassword',
+</span><span class='line'>  success: function() {
+</span><span class='line'>      console.log('success');
+</span><span class='line'>  },
+</span><span class='line'>  error: function() {
+</span><span class='line'>      console.log('failure');
+</span><span class='line'>  }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+
+<p>JQuery has some helpers for authorisation, so the easiest way to get it working is setting <code>xhrFields.withCredentials</code> to <code>true</code> and passing <code>username</code> and <code>password</code> as separate parameters, this way we don&#8217;t have to worry about the intricacies of creating the auth hash ourselves.</p>
+
+<p>Another convenience property is <code>headers</code> which you can use to inject any custom headers you might need, without having to manually do it with <code>beforeSend</code>.</p>
+
+<h2>Apache config</h2>
+
+<p>Another big stumbling block for me was to get the settings for Apache right.</p>
+
+<p>The very first thing you need to do is making sure <code>mod_headers</code> is enabled, which can be as simple as:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ sudo a2enmod headers
+</span><span class='line'>$ sudo /etc/init.d/apache2 force-reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once that&#8217;s done, you can either edit your main <code>httpd.conf</code> or <code>apache.conf</code> files, or just create an <code>.htaccess</code> file in the folder you want to enable CORS in.</p>
+
+<p>These are the settings I ended up with after a lot of experimentation:</p>
+
+<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='plain'><span class='line'>SetEnvIf Origin ^(.*)$ ORIGIN_DOMAIN=$0
+</span><span class='line'>&lt;Files "*">
+</span><span class='line'>  Header add Access-Control-Allow-Origin %{ORIGIN_DOMAIN}e
+</span><span class='line'>  Header add Access-Control-Allow-Methods "GET, OPTIONS"
+</span><span class='line'>  Header add Access-Control-Allow-Headers "Authorization, X-Requested-With, Content-Type, Origin, Accept"
+</span><span class='line'>  Header add Access-Control-Allow-Credentials "true"
+</span><span class='line'>&lt;/Files></span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first line makes sure that <code>Origin</code> is echoed back, because as it turns out once you have some custom headers a simple <code>*</code> in <code>Access-Control-Allow-Origin</code> won&#8217;t do any more. You can do some URL filtering here if you want, but this setup makes sure that even <code>file:///</code> works which is great for development.</p>
+
+<p>In <code>Access-Control-Allow-Methods</code> we make sure that <code>OPTIONS</code> will work, and with <code>Access-Control-Allow-Headers</code> and <code>Access-Control-Allow-Credentials</code> we set everything up for a basic authorisation handshake.</p>
+
+<p>Annoyingly none of these worked on the simple HTML file I uploaded, until as a desperate idea after a few hours of futile attempts I tried renaming it to PHP extension which made Apache suddenly apply all of them.</p>
+
+<p>If that wasn&#8217;t enough, the unregistered development HTTPS security certificate also blocked my attempts to get things working. If you open any URL on the server you&#8217;re using and accept the certificate this problem will go away, otherwise the options are to <a href="http://superuser.com/questions/27268/how-do-i-disable-the-warning-chrome-gives-if-a-security-certificate-is-not-trust">install / import the certificate on a system level</a> or to start the browser with some flags like <code>--allow-running-insecure-content</code> for Chrome.</p>
+
+<p>Hope this will help someone else facing the same problems!</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T17:44:00+00:00" class="dt-published" pubdate data-updated="true">2013 Jan 18</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category p-category' href='/blog/categories/cors/'>cors</a>, <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/javascript/'>javascript</a>, <a class='category p-category' href='/blog/categories/jquery/'>jquery</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+        <span class="comments"><a href="/blog/2013/01/18/getting-cross-origin-resource-sharing-with-complex-jquery-ajax-requests/#disqus_thread">Comments</a></span>
+        
+    </div>
+</article>
+
+
+    <article class="post h-entry">
     <h1 class="title"><a href="/blog/2012/09/03/some-thoughts-on-the-fragile-relationship-between-nature-conservation-and-economic-growth/">Some thoughts on the fragile relationship between nature conservation and economic growth</a></h1>
     <div class="entry e-content">
         <p><em>Update: I started a small blog / public notebook of all things sustainable / resilient at <a href="http://transientresilient.tumblr.com/">transientresilient.tumblr.com</a></em></p>
@@ -213,120 +369,6 @@
     </div>
 </article>
 
-
-    <article class="post h-entry">
-    <h1 class="title"><a href="/blog/2012/05/17/setting-up-octopress/">Setting up Octopress</a></h1>
-    <div class="entry e-content">
-        <h2>Steps I&#8217;ve taken</h2>
-
-<p>Note: &#8216;username&#8217; is your Github username and &#8216;myblog&#8217; is the name of your blog / site which you&#8217;ll have to replace in the instructions. Don&#8217;t sweat too much about the latter, it&#8217;s just a project name you won&#8217;t necessary have to use on your site.</p>
-
-<h3>Set up Github repository for hosting</h3>
-
-<p>Go to: https://github.com/new</p>
-
-<p>Fill in form and create repo called &#8220;username.github.com&#8221;</p>
-
-<h3>Set up Octopress <a href="http://octopress.org/docs/setup/">&#8594;</a></h3>
-
-<p>If you don&#8217;t have it yet, install <a href="https://github.com/sstephenson/rbenv#section_2">rbenv</a> and <a href="https://github.com/sstephenson/ruby-build#installing-ruby-build">ruby-build</a> (to handle Ruby runtimes and build gems). If you&#8217;re on Windows this is going to be a bit more complicated, but setting up <a href="http://rubyinstaller.org/downloads">RubyInstaller</a> and <a href="https://github.com/oneclick/rubyinstaller/wiki/Development-Kit">Ruby Development Kit</a> is not that bad.</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rbenv install 1.9.2-p290
-</span><span class='line'>$ git clone git://github.com/imathis/octopress.git myblog
-</span><span class='line'>$ cd myblog
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ rbenv rehash
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rbenv rehash</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Get a nice theme <a href="http://zespia.tw/Octopress-Theme-Slash/">&#8594;</a></h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-</span><span class='line'>$ rake install['slash']</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Configure Octopress <a href="http://octopress.org/docs/configuring/">&#8594;</a></h3>
-
-<p>Edit at least &#8220;Main Configs&#8221; in _config.yml. You can come back later to fill in the rest.</p>
-
-<h3>Set site up for Github Pages</h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Paste your Github repo URL: git@github.com:username/username.github.com.git when prompted.</p>
-
-<p>This will set up some folders and the structure of the Git repos. <code>Master</code> branch will track the actual generated website (the contents of <code>_deploy</code> folder) and <code>source</code> will be the sources you are going to edit.</p>
-
-<h3>Create your first post <a href="http://octopress.org/docs/blogging/">&#8594;</a></h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake new_post["Hello World!"]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit contents of myblog/source/_posts/yyyy-mm-dd-hello-world.markdown</p>
-
-<h3>Generate page and see it in your browser <a href="http://octopress.org/docs/deploying/github/">&#8594;</a></h3>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake generate
-</span><span class='line'>$ powify create myblog
-</span><span class='line'>$ powify browse myblog</span></code></pre></td></tr></table></div></figure>
-
-
-<p>See if it&#8217;s all good locally</p>
-
-<figure class='code'><div class='highlight'><table><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='plain'><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Check the real thing: http://username.github.com</p>
-
-        
-        
-    </div>
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-17T22:18:00+01:00" class="dt-published" pubdate data-updated="true">2012 May 17</time></div>
-        <div class="tags">
-
-<div class="cat">
-  
-    <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/github/'>github</a>, <a class='category p-category' href='/blog/categories/octopress/'>octopress</a>, <a class='category p-category' href='/blog/categories/ruby/'>ruby</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
-  
-</div>
-
-</div>
-        
-        <span class="comments"><a href="/blog/2012/05/17/setting-up-octopress/#disqus_thread">Comments</a></span>
-        
-    </div>
-</article>
-
 <nav id="pagenavi">
     
         <a href="/blog/page/3/" class="prev">Some newer posts this way</a>
@@ -337,7 +379,7 @@
 </nav>
 </div>
 	<footer class="inner"><span><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img id="creativecommons" alt="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a></span>
-  <span>2015 - Daniel Demmel</span>
+  <span>2017 - Daniel Demmel</span>
   <span class="credit"> | Powered by <a href="http://octopress.org">Octopress</a></span>
   <span class="credit"> | Hosted by <a href="https://github.com"><span>Github</span><img id="octocat" alt="Github logo" src="https://github.com/favicon.ico"></a></span></footer>
 	<script src="/javascripts/slash.js"></script>

@@ -70,6 +70,427 @@
 
 
     <article class="post h-entry">
+    <h1 class="title"><a href="/blog/2017/07/12/Give-app-servers-a-REST-CDNs-and-APIs-are-the-new-LAMP/">Give app servers a REST – CDNs and APIs are the new LAMP</a></h1>
+    <div class="entry e-content">
+        <h2>Video</h2>
+
+<p>Coming soon!</p>
+
+<h2>Talk transcript</h2>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.001.jpeg" alt="Slide 01" /></p>
+
+<p>Today I’m here to talk about a different approach to working with web apps, which was a big mindset shift for me, so I’m very excited to share it with you!</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.002.jpeg" alt="Slide 02" /></p>
+
+<p>But before I get into the technical bits, I’d like to talk a bit about water, as different ways of accessing it have a lot of interesting parallels to web apps!</p>
+
+<p>As you probably know, water is a very precious resource. A clean water supply is the single most important determinant of public health.</p>
+
+<p>The plaque on this photo is in the memory of William Pranket in the village of Stoke Sub Hamdon, where his well was the only source of water until the early 20th century.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.003.jpeg" alt="Slide 03" /></p>
+
+<p>Improvements in delivering water to people are relatively recent, and far from consistent around the World.</p>
+
+<p>A good example is Hong Kong, where until 1964 water rationing was a constant reality, occurring more than 300 days per year.</p>
+
+<p>In the worst crisis, water was delivered only every 4 days for 4 hours each time.</p>
+
+<p>In this photo you can see how bad the situation became, people had to queue in the sun for hours to get some water from the public well.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.004.jpeg" alt="Slide 04" /></p>
+
+<p>So these shared wells suffer from a few different problems:</p>
+
+<ul>
+<li>People need to potentially go very far from their house, and queue while the water is drawn for the people in front of them</li>
+<li>It’s impossible to completely isolate the well and the water source from contamination (as you can see in this illustration), which leads to doubtful safety</li>
+<li>Relying on a single groundwater reserve or spring, each well is exposed to droughts, making water temporarily unavailable at times</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.005.jpeg" alt="Slide 05" /></p>
+
+<p>While current municipal water systems of course aren’t perfect either, the service is much better than public wells.</p>
+
+<p>They make access to water quick, by bringing it close to the point of use through an extensive network.</p>
+
+<p>Water coming out of the tap is safe – it’s difficult to compromise the sealed, underground pipes.</p>
+
+<p>Supply is reliable – the available water sources are interconnected and widely distributed, getting rid of inconsistencies.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.006.jpeg" alt="Slide 06" /></p>
+
+<p>Unfortunately a lot of time facts alone are not quite enough to enact change…</p>
+
+<p>This is the map of the infections in the Broad Street cholera outbreak in Soho, London, as drawn by a physician John Snow in his study in 1854.</p>
+
+<p>All the incidents were centred around the Broad Street pump, a public water access point.</p>
+
+<p>Snow’s hypothesis was that contaminated water, not air, was the source of illness and he designed the World’s first double blind experiment to verify his theory.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.007.jpeg" alt="Slide 07" /></p>
+
+<p>But since people have always been people, the scientific evidence left the Members of Parliament unmoved and no substantive action was taken.</p>
+
+<p>That is, until 4 years after the study, when the historic heatwave of 1858 came.</p>
+
+<p>Temperatures soaring well above 40°C made the level of the river Thames drop dramatically, exposing more than 2 metres of raw sewage, which quickly started to ferment and caused an unbearable stink.</p>
+
+<p>As the recently rebuilt Houses of Parliament were right next to the river, the stench suddenly created a very strong political will for action where the science could not, so the drafting and passage of new laws to fund a new sewer scheme – on a scale the World hasn’t seen before – happened in just 18 days.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.008.jpeg" alt="Slide 08" /></p>
+
+<p>So how do these stories relate to the Web?</p>
+
+<p>As you might have guessed, wells represent the current centralised app server paradigm.</p>
+
+<p>But what do I mean by “centralised app server”? I used LAMP in the title of the talk, but what I’m going to talk about is true for all stacks, where there is a constantly running application daemon on a server somewhere, responsible for dynamically responding with some web content, be it written in PHP, Ruby, Java, Go, Javascript, .NET, Python or anything else.</p>
+
+<p>I call them “app servers” to create a distinction with web servers (like Apache or Nginx), ones which you need no matter what, to listen and send HTTP responses even if you just have the simplest HTML file to show.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.009.jpeg" alt="Slide 09" /></p>
+
+<p>So the characteristics of this architecture is:</p>
+
+<ul>
+<li>Executing some application code for most requests – at the very least rendering templates</li>
+<li>Content often stored in a database – where constructing a page might mean complicated queries</li>
+<li>Orchestrating multiple server instances for scaling can be tricky, both from an application code and infrastructure perspective</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.010.jpeg" alt="Slide 10" /></p>
+
+<p>So what’s wrong with this approach?</p>
+
+<p>It’s just a bit too easy to have problems with performance, security, reliability and resource use.</p>
+
+<p>Let’s have a look at these one by one!</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.011.jpeg" alt="Slide 11" /></p>
+
+<p>If a web application needs to execute code and do database queries, no matter how well it is optimised, the response will take some time to prepare.</p>
+
+<p>Caching can help with the issue, but it’s tricky to get right as I’ll explain in a moment.</p>
+
+<p>Also, unless you have a massive hosting budget and some dedicated dev ops time to set up instances in different regions, and tie them together with load balancers, the further people are from your server, the bigger their network delay be – if you ever used the web in Australia, it’s not fun.</p>
+
+<p>Google AMP and Facebook Instant Articles wouldn’t be around if this wasn’t a huge problem, but is creating walled gardens really a great solution?</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.012.jpeg" alt="Slide 12" /></p>
+
+<p>So caching is a sensible first step for a speedier response, before getting on the journey with instance scaling.</p>
+
+<p>But for a web stack which consists of multiple layers to produce the final content, caching might end up being implemented in various places.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.013.jpeg" alt="Slide 13" /></p>
+
+<p>Unfortunately the complexity of multi layer cache can quickly spiral out of control.</p>
+
+<p>Invalidating cache is one of the hardest problems in software development, so doing it in multiple places and between multiple disciplines becomes truly mind bending.</p>
+
+<p>So what started as a simple web site or web app will start to require some serious infrastructure and tooling work.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.014.jpeg" alt="Slide 14" /></p>
+
+<p>It feels like there isn’t a week passing nowadays without a serious security vulnerability exposed in one back-end framework or another, and possibly even more undisclosed ones silently exploited.</p>
+
+<p>And it’s not because they are poorly written, but the more they try to do for us, the bigger the potential attack surface is, especially in the hands of less security conscious users and developers, which let’s be honest, is most of us.</p>
+
+<p>While fixing a security problem might mean a few sleepless nights for developers, a mass data breach can easily mean a collapsed business due to evaporating trust.</p>
+
+<p>Despite this, keeping on top of security updates is usually very low on most web team’s todo list.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.015.jpeg" alt="Slide 15" /></p>
+
+<p>It seems there is no perfect world with web sites: it’s a problem if no one bothers to visit them, or if they suddenly see a lot of visitors and they stop responding.</p>
+
+<p>What’s the worst is that in most cases they can’t even show read only content, so even though the server side app should really only be needed for user interaction, the content itself also becomes inaccessible - Reddit is the perfect example for this.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.016.jpeg" alt="Slide 16" /></p>
+
+<p>According to a study by Jonathan Koomey, a Stanford University professor:</p>
+
+<ul>
+<li>Data centres worldwide are estimated to have ten million unused servers, which could be hiding a potential cost of 30 billion dollars</li>
+<li>So around 30% of the world’s physical servers are sitting in a “comatose” or “zombie” state, as no information or compute services have been processed for at least six months</li>
+<li>Even more surprisingly, a similar percentage of virtual machines are also zombies, despite them being more expensive and easier to manage</li>
+<li>If shut down, the servers could reduce electricity load by at least 4GWs, not even mentioning the cost of manufacturing and housing them</li>
+<li>These numbers are just the tip of the iceberg (as servers which are idle most of the time but do some work every now and then are excluded), so the potential cost and environmental savings are huge</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.017.jpeg" alt="Slide 17" /></p>
+
+<p>Now after having talked about the problem, let me walk you through the promise of this fabled new way of doing things.</p>
+
+<p>The piped water in my little story at the beginning represented a new approach, which can be described as “distributed asset delivery with serverless computing”.</p>
+
+<p>So there are two important parts in this – admittedly quite long – name:</p>
+
+<ul>
+<li>Firstly, the distributed asset delivery means finding a way to deliver a web app’s assets (be that HTML, CSS, Javascript, images, fonts, videos, and so on) from a web server as close to visitors as possible</li>
+<li>Secondly, to handle any sort of user interaction which needs data manipulation, communication, payments or any action really, in a way which avoids running your own, persistent app servers</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.018.jpeg" alt="Slide 18" /></p>
+
+<p>So what are the characteristics of this approach?</p>
+
+<ul>
+<li>Content and assets are preprocessed as much as possible before deployment</li>
+<li>Any dynamic functionality and data is delivered through APIs – accessible both at compile time and in the browser client</li>
+<li>Static assets are served up from a distributed host – typically a CDN</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.019.jpeg" alt="Slide 19" /></p>
+
+<p>So how does something built with this architecture would look like from a visitor’s point, or in other words the front-end side?</p>
+
+<p>If you have a look at how progressive web apps work, they pretty much embody the idea:</p>
+
+<ul>
+<li>You start out with an application shell built from static assets, very similar to native mobile apps, just without the extra friction of discovery and explicit download</li>
+<li>The content inside can be pre-rendered for the first load, but a Single Page Application takes over navigation and data loading on the client side, once the Javascript app bootstrapped</li>
+<li>With browsers implementing Service Workers, this means complete offline support using the existing app shell and already downloaded data</li>
+<li>So once running, these apps only need to connect to APIs, which can be served up completely independently of where the application assets are originally from</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.020.jpeg" alt="Slide 20" /></p>
+
+<p>So this provides us with a potential for a big mindset shift, but first of all let me give you a quick introduction to CDNs. The acronym stands for Content Delivery Networks, and they are mostly known for delivering videos and images as a way to take some of the heavy load off web servers.</p>
+
+<p>But there’s no reason for us to stop there, why not use CDNs as the first point of contact right from the DNS response?</p>
+
+<p>Interestingly this would take us one step closer to Tim Berners-Lee’s original vision of a distributed web, where even catastrophic events can’t take the entire network down – in stark contrast with the AWS S3 outage this February, which took several massive services down, despite only happening in just one of their data centres in the US. And the biggest irony was that Amazon engineers themselves were unable to update their status dashboard as it relied on the same host.</p>
+
+<p>That said, today’s CDNs are still centrally controlled networks of servers, but the largest ones have hundreds of independent endpoints (or in industry jargon: Points of Presence) around the World – including places which are not the US and Europe, I can assure you they do exist!</p>
+
+<p>What makes using CDNs easier nowadays is that they are more and more scriptable through APIs, so for example easier to flush content, even just partially.</p>
+
+<p>My current favourite host is Netlify, they are pretty much the Heroku of smart CDN based hosting and also do some great open source work in this space.</p>
+
+<p>But the future can be completely distributed: IPFS – which stands for InterPlanetary File System – mixed up ideas and technologies from BitTorrent and the blockchain amongst others.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.021.jpeg" alt="Slide 21" /></p>
+
+<p>But since CDNs can only work with static content, for any interaction requiring computing we still need to connect to an API.</p>
+
+<p>These APIs of course do need a server to run on, but it doesn’t need to be a constantly running one provisioned and managed by you, eating money even when not in use or getting overloaded so you need to scramble to scale.</p>
+
+<p>Serverless functions (or Function as a Service) can be a great solution for a lot of backend needs, especially when they are connected to a managed database to persist state and data.</p>
+
+<p>But Sports Direct, Deliveroo, Uber or any other firms employing zero hours contractors are waking up to the reality that they can’t wiggle out of all their responsibilities…</p>
+
+<p>Despite all the hype, these serverless functions of course still won’t write, deploy and maintain themselves…</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.022.jpeg" alt="Slide 22" /></p>
+
+<p>So before writing a single line of code, you can be even better off considering servicefull APIs, or in other words hosted services offered as APIs.</p>
+
+<p>While the idea has been around since Web 2.0 was a thing, nowadays you can find great services even for core functions like:</p>
+
+<ul>
+<li>Auth0 for authentication and authorisation</li>
+<li>Firebase for storing user data</li>
+<li>Contentful for creating content on an editor friendly interface, and so on</li>
+</ul>
+
+
+<p>So unless you’re dealing with a service already on a massive scale, the developer time and worry you can save will more than pay for the cost of these “humble sweatshops”.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.023.jpeg" alt="Slide 23" /></p>
+
+<p>If you think these metaphors were a bit contentious, you’re totally right. But rather than having the intention of making fun of the people who are suffering, I’d actually like to use this platform to dedicate a few sentences to them.</p>
+
+<p>I think we – the tech community as a whole – aren’t doing a great job at giving enough respect to people around us. Which is in stark contrast with who much we obsess about computers and gadgets.</p>
+
+<p>So if you take away only one thing from this talk, let that be taking a moment every now and then to think about the impact of your work and your words on the people around you and in the wider World, especially if they are not like you!</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.024.jpeg" alt="Slide 24" /></p>
+
+<p>Right, after this little digression, let’s see how these solutions help with the issues I talked about earlier.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.025.jpeg" alt="Slide 25" /></p>
+
+<p>I split each of these between the two parts, so the distributed asset delivery via CDNs and serverless computing.</p>
+
+<p>So performance with CDNs is a joy to see really, since they are only dealing with files and each visitor will get them from the nearest endpoint, load times are pretty much instant.</p>
+
+<p>At the same time, computing on serverless infrastructure automatically scales to whatever the demand is (except for the most extreme cases).</p>
+
+<p>While in your own server no one stops you from shooting yourself in the foot, in a Function as a Service you have to work within limits, so for example on AWS Lambda any execution has to finish within 300 seconds, which might sound like a lot, but knowing the constraints will make you think about splitting up, measuring and optimising functions earlier.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.026.jpeg" alt="Slide 26" /></p>
+
+<p>Just a bunch of files on a CDN is practically impossible to hack, but even better, there’s not much in it to do, so it’s unlikely many people will even try.</p>
+
+<p>The virtual machines and containers running your serverless code are transient by nature, so they don’t stick around long enough to give people time to hack into.</p>
+
+<p>Also, once they are spun down, security updates can be applied right away without any disruption, so next time they run, you’ll get a freshly updated container image.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.027.jpeg" alt="Slide 27" /></p>
+
+<p>Due to their distributed nature, CDNs are very resilient to denial of service attacks, but even if a well resourced adversary manages to take one down, migrating files to another one is not difficult.</p>
+
+<p>Serverless infrastructure mostly operates on containers, which are very quick to spin up, so unless you go completely nuts with dependencies, even cold starts will be at an acceptable speed.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.028.jpeg" alt="Slide 28" /></p>
+
+<p>Again, since CDNs serve only files, there’s not much computing they need to do other than routing. But also, by using and endpoint close to visitors, less network hops will be used, saving on using resources on each switch on the way.</p>
+
+<p>And with serverless, idle time is minimised by cleaning up containers after a very short time, while at the same time you also don’t need to over-provision due to the ability to scale on demand.</p>
+
+<p>These translate to big savings both in terms of monetary and environmental resources.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.029.jpeg" alt="Slide 29" /></p>
+
+<p>So how can you get started, you must be thinking “surely it’s a lot of work to do all these new things”?</p>
+
+<p>Well, it used to be, and only big and tech heavy organisations like the Guardian, Google or Alibaba could afford to develop custom solutions for them in house. But hey, it’s 2017 and I work for a studio where we often don’t have more that 6 weeks to turn projects around from business problems to a few versions deployed, so I wouldn’t be here if there weren’t tools available to do most of the hard work for me!</p>
+
+<p>Static website generators have been around for years now, and people have great times with them producing websites based around content. But these are static web sites, lacking the modern browser based powers of web apps which people more and more expect now.</p>
+
+<p>So it was only a matter of time until a new generation emerged, which I call “progressive web app pipelines” and will explain them in a moment.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.030.jpeg" alt="Slide 30" /></p>
+
+<p>But first let’s have a look at what static website generators do, just so it’s clear what I’m talking about. The poster child for these is Jekyll, which is the Ruby based generator behind Github Pages. It’s been around for ages and is remarkably good at producing simple and fast websites, taking it way beyond the original role of generating documentation sites for open source projects.</p>
+
+<p>The way it works is taking Markdown content files with YAML metadata and putting them in various Liquid templates. This process does a great job at producing HTML and CSS, but Javascript is just an afterthought, stuck in the jQuery era of DOM selectors.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.031.jpeg" alt="Slide 31" /></p>
+
+<p>So what do these new progressive web app pipelines do beyond that?</p>
+
+<p>This diagram is from Gatsby, an open source tool which just emerged from a full rewrite with the final 1.0 version released last Thursday
+So what makes it a big deal?</p>
+
+<ul>
+<li>First, it takes more than files as input, there are already plugins out there which can dump data from APIs like Contentful’s, Twitter’s or Instagram’s</li>
+<li>Second, it aggregates all the content and assets and creates a GraphQL API to work with them, so you can have custom queries co-located with front-end components, including generating image sizes appropriate for various contexts</li>
+<li>Third, it generates a fully formed PWA together with pre-generated JSON data files, ready to be deployed on a static host</li>
+</ul>
+
+
+<p>Some key ingredients in this are:</p>
+
+<ul>
+<li>React, with its mature support for server side (or in this case compile time) generation and great ecosystem of tools like the Redux state manager</li>
+<li>And Webpack with its similarly huge ecosystem, as an advanced build tool providing the pipeline and plugins for processing all assets</li>
+</ul>
+
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.032.jpeg" alt="Slide 32" /></p>
+
+<p>But I don’t want to look like I’m blindly worshipping Gatsby, there’s another similar open source tool called Phenomic which is also well worth checking out, especially if you don’t want to use React for any reason, as they are working on supporting multiple Javascript single page application choices.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.033.jpeg" alt="Slide 33" /></p>
+
+<p>What makes all of these tools tick though is a big, fat asset compiler, which does the hard work at build time. What this means is some high level orchestration code, which makes – in these cases – Webpack and its plugins work smoothly together and lets you focus on application code.</p>
+
+<p>A few years back I used to dread setting toolchains up, as it meant either a lot of hand coding and head scratching or trying to understand and strip code out of boilerplates. But in both cases usually ending up with compilation times slowing down a few weeks into development.</p>
+
+<p>Luckily nowadays that’s mostly history with incremental builds, live browsers refresh, hot module replacement and state replays, without having to spend a lot of time manually piecing these together.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.034.jpeg" alt="Slide 34" /></p>
+
+<p>For dynamic content and data on the input side of these pipelines there are headless CMSs and hosted database APIs. What this means in practice is that website content writers can work on a nice visual editing interface and the content output can be accessed only via an API, making it a headless CMS.</p>
+
+<p>This in contrast with the more monolithic CMSs responsible for rendering content in their on templates and locking you into their ways of doing things. Similarly, to store user generated data you can use something like Firebase and use the public content (like comments, uploads, and so on) as input in your static site. This way any time there’s a change either in your code or the data sources, you can trigger a rebuild using a web hook.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.035.jpeg" alt="Slide 35" /></p>
+
+<p>As the final part of my talk I would like to share a few cases studies with you.</p>
+
+<p>A lot of you probably already read articles on Smashing Magazine, but in case not, it’s a big, international publishing company, mostly writing about front-end development.</p>
+
+<p>A year or so ago they decided to replace their overstretched Wordpress back-end with a static website generator. They used Jekyll at first, then switched to Metalsmith to be able to use Handlebars templates which can also be rendered on the front-end.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.036.jpeg" alt="Slide 36" /></p>
+
+<p>They have a fair amount of content, so using static compilation out of the box meant that the linearly increasing compilation time spiralled to 2 hours for each change which of course wasn’t very useful.</p>
+
+<p>Moving on to using incremental builds (mostly by making sure to only process images if they actually changed by comparing timestamps) and splitting content per language, they managed to go down to 2-5 minutes builds depending on the number of images added.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.037.jpeg" alt="Slide 37" /></p>
+
+<p>In developing countries like India, where devices are increasingly catching up in processing power and having modern browsers, but storage space is still precious and networks are a bit patchy, the impact of progressive web apps with offline capabilities and are much more important.</p>
+
+<p>So Twitter set out to write a lightweight web client as an alternative to their downloadable apps.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.038.jpeg" alt="Slide 38" /></p>
+
+<p>Since Twitter is far from being static content and the feed is tailored to each user, they had to put in place a small Node service for initial server side rendering.</p>
+
+<p>But the browser application itself is making full use of PWA features and CDN based asset delivery, so they managed to offer a great experience while cutting costs by an order of magnitude.</p>
+
+<p>I honestly see no reason why they couldn’t use a lot of this on the desktop site too, so curious to see when will they make the jump,</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.039.jpeg" alt="Slide 39" /></p>
+
+<p>And finally as a full stack example, there’s a service called A Cloud Guru.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.040.jpeg" alt="Slide 40" /></p>
+
+<p>They offer AWS courses, quizzes, certifications, forums, user profiles, payments and so on, just like any other similar business.</p>
+
+<p>But what started as an experiment for them became a principle: they don’t use a single server of their own.</p>
+
+<p>They have a lot of interesting articles on their Medium blog about the journey, but what was the most interesting part for me is that despite being AWS specialists, they have very little of their own services running in Lambda. Instead, working with a more servicefull ethos by using existing services, they found that they could focus on their own application and at the same time became part of multiple communities, spreading the money and love around instead of relying on just one big cloud provider.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.041.jpeg" alt="Slide 41" /></p>
+
+<p>As you could see there are a lot of different ways to put this approach into use and methods you can deploy independently, so the one big thing I’d like to leave with you is: When designing your service architecture, ask yourself the question if you really need to have a server running somewhere.</p>
+
+<p>And of course there are many perfectly valid reasons to have them, on the current project I’m on we’re actually developing an API and some transactional pages with Ruby on Rails, as the service is for a children’s hospital with plans to roll out throughout the NHS, we didn’t want to freak them out with something they’d struggle to find maintainers for or would have concerns around data we can’t answer – that said, the hospital employee interface is going to be a PWA which uses Rails as an API only!</p>
+
+<p>But as a father of two, I can assure you that while bringing your own babies into existence is for sure an exhilarating thing (especially in the conception stage), but the responsibility of looking after them is going to stick, so you have to be careful with how many can you comfortably handle.</p>
+
+<p><img src="/images/posts/Give%20app%20servers%20a%20REST.042.jpeg" alt="Slide 42" /></p>
+
+<p>Thanks!</p>
+
+        
+        
+    </div>
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-07-12T19:11:00+01:00" class="dt-published" pubdate data-updated="true">2017 Jul 12</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category p-category' href='/blog/categories/api/'>API</a>, <a class='category p-category' href='/blog/categories/cdn/'>CDN</a>, <a class='category p-category' href='/blog/categories/pwa/'>PWA</a>, <a class='category p-category' href='/blog/categories/development/'>development</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
+  
+</div>
+
+</div>
+        
+        <span class="comments"><a href="/blog/2017/07/12/Give-app-servers-a-REST-CDNs-and-APIs-are-the-new-LAMP/#disqus_thread">Comments</a></span>
+        
+    </div>
+</article>
+
+
+    <article class="post h-entry">
     <h1 class="title"><a href="/blog/2015/11/28/why_and_how_github_should_have_binary_diffs/">Why and how Github should have binary diffs</a></h1>
     <div class="entry e-content">
         <p>While git and Github brought tremendous improvement to how people can manage changes and collaborate on their software and simple textual content, most people still work with various binary formats and could benefit greatly from a similar boost in the way they work.</p>
@@ -285,76 +706,6 @@
     </div>
 </article>
 
-
-    <article class="post h-entry">
-    <h1 class="title"><a href="/blog/2015/08/16/indiewebify-yourself/">Indiewebify yourself</a></h1>
-    <div class="entry e-content">
-        <h2>The web should be open and it needs you</h2>
-
-<p>I recently spotted a reference about the <a href="http://indiewebcamp.com/">Indie Web Camp</a> somewhere – most likely on Twitter – and reading a bit about it I was immediately sold on the idea and principles.</p>
-
-<p>The core principle is to take the control back from silos, or the walled gardens of the Web and make it personal and open again. Which is all very well and something I agree with, but I just didn&#8217;t really know what are the small, incremental actions I can take to get there.</p>
-
-<p>The Semantic web, microformats and taking content back have been in the back of my mind, but reading standard drafts or mulling about what&#8217;s the point of a social network without people never sounded like good starting points.</p>
-
-<h2>Now it&#8217;s easy to get started</h2>
-
-<p>So it was very refreshing to see simple to do and practical guides to get my personal website and blog up to speed with a couple of simple class names and missing metadata additions. What I found particularly useful and fun to get started with is the <a href="http://indiewebcamp.com/IndieMark">Indiemark</a> checklist and easy to use validators on <a href="http://indiewebify.me/">IndieWebify.me</a> for things like the <code>rel=me</code> links to other web profiles, home page <code>h-card</code> indenty and <code>h-entry</code> markup for blog posts.</p>
-
-<p>So far I got everything in mark 1 done which was fairly easy with my static, Jekyll / Octopress based website mostly just by adding some classes to existing markup and restructuring it here and there, but level 2 has some more challenging requirements, especially with creating some nice automatic way to cross-post <a href="http://indiewebcamp.com/notes">notes</a> to Twitter. I&#8217;ll update this post once I have these figured out, I&#8217;ll either need to find or create some small libraries to help with this.</p>
-
-<h2>But why bother?</h2>
-
-<p>Cluetrain&#8217;s <a href="http://cluetrain.com/newclues/">New Clues</a> give some answers which are much nicer formulated than how I could put it:</p>
-
-<blockquote><p>(77). Non-neutral applications built on top of the neutral Net are becoming as inescapable as the pull of a black hole.</p>
-
-<p>(78). If Facebook is your experience of the Net, then you’ve strapped on goggles from a company with a fiduciary responsibility to keep you from ever taking the goggles off.</p>
-
-<p>(79). Google, Amazon, Facebook, Apple are all in the goggles business. The biggest truth their goggles obscure: These companies want to hold us the way black holes hold light.</p>
-
-<p>(80). These corporate singularities are dangerous not because they are evil. Many of them in fact engage in quite remarkably civic behavior. They should be applauded for that.</p>
-
-<p>(81). But they benefit from the gravity of sociality: The “network effect” is that thing where lots of people use something because lots of people use it.</p>
-
-<p>(82). Where there aren’t competitive alternatives, we need to be hypervigilant to remind these Titans of the Valley of the webby values that first inspired them.</p>
-
-<p>(83). And then we need to honor the sound we make when any of us bravely pulls away from them. It’s something between the noise of a rocket leaving the launchpad and the rip of Velcro as you undo a too-tight garment.</p></blockquote>
-
-<p>Worths reading the rest of the points too if you care about the Web in any way!</p>
-
-        
-        
-    </div>
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-08-16T12:11:00+01:00" class="dt-published" pubdate data-updated="true">2015 Aug 16</time></div>
-        <div class="tags">
-
-<div class="cat">
-  
-    <a class='category p-category' href='/blog/categories/independent/'>independent</a>, <a class='category p-category' href='/blog/categories/indie/'>indie</a>, <a class='category p-category' href='/blog/categories/microformats/'>microformats</a>, <a class='category p-category' href='/blog/categories/semantic/'>semantic</a>, <a class='category p-category' href='/blog/categories/web/'>web</a>
-  
-</div>
-
-</div>
-        
-        <span class="comments"><a href="/blog/2015/08/16/indiewebify-yourself/#disqus_thread">Comments</a></span>
-        
-    </div>
-</article>
-
 <nav id="pagenavi">
     
     
@@ -363,7 +714,7 @@
 </nav>
 </div>
 	<footer class="inner"><span><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img id="creativecommons" alt="Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a></span>
-  <span>2015 - Daniel Demmel</span>
+  <span>2017 - Daniel Demmel</span>
   <span class="credit"> | Powered by <a href="http://octopress.org">Octopress</a></span>
   <span class="credit"> | Hosted by <a href="https://github.com"><span>Github</span><img id="octocat" alt="Github logo" src="https://github.com/favicon.ico"></a></span></footer>
 	<script src="/javascripts/slash.js"></script>
