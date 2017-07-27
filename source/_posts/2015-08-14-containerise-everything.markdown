@@ -15,8 +15,10 @@ _____________________
 ### Video
 
 <div class="video-container">
-  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
+
+<a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>
 
 ### Slides
 
