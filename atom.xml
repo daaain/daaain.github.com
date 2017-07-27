@@ -4,7 +4,7 @@
   <title><![CDATA[I am dain]]></title>
   <link href="http://danieldemmel.me/atom.xml" rel="self"/>
   <link href="http://danieldemmel.me/"/>
-  <updated>2017-07-12T19:48:06+01:00</updated>
+  <updated>2017-07-27T14:54:44+01:00</updated>
   <id>http://danieldemmel.me/</id>
   <author>
     <name><![CDATA[Daniel Demmel]]></name>
@@ -20,7 +20,12 @@
     <id>http://danieldemmel.me/blog/2017/07/12/Give-app-servers-a-REST-CDNs-and-APIs-are-the-new-LAMP</id>
     <content type="html"><![CDATA[<h2>Video</h2>
 
-<p>Coming soon!</p>
+<div class="video-container">
+  <iframe src="https://player.vimeo.com/video/227249251?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+
+<p>Video recorded by Skills Matter, originally appeared on: <a href="https://skillsmatter.com/skillscasts/10234-give-app-servers-a-rest-cdns-and-apis-are-the-new-lamp">https://skillsmatter.com/skillscasts/10234-give-app-servers-a-rest-cdns-and-apis-are-the-new-lamp</a>.</p>
 
 <h2>Talk transcript</h2>
 
@@ -619,9 +624,11 @@ So what makes it a big deal?</p>
 <h3>Video</h3>
 
 <div class="video-container">
-  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+  <iframe src="https://player.vimeo.com/video/136610729?color=c9ff23" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 
+
+<p><a href="https://vimeo.com/136610729">Daniel Demmel at re:develop 2015 - Containerise everything</a> from <a href="https://vimeo.com/wearebase">Base</a> on <a href="https://vimeo.com">Vimeo</a></p>
 
 <h3>Slides</h3>
 
