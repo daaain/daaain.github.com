@@ -2,11 +2,11 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://danieldemmel.me
+url: https://danieldemmel.me
 title: I am dain
 subtitle: and these are my thoughts mostly on technology
 author: Daniel Demmel
-simple_search: http://google.com/search
+simple_search: https://google.com/search
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
